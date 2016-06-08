@@ -9,7 +9,7 @@ print($lista)}  clausulaSelect
         | FROM
         ;
 
-clausulaSelect : COLUNA  c1=clausulaSelect {print($clausulaSelect.text)}| ;
+clausulaSelect : COLUNA ',' c1=clausulaSelect {print($clausulaSelect.text)}| COLUNA ;
 
 
 WS: [ \n\t\r]+ -> channel(HIDDEN);

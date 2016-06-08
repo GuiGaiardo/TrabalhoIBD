@@ -5,13 +5,14 @@ from io import StringIO
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\b")
-        buf.write("\24\4\2\t\2\4\3\t\3\3\2\3\2\3\2\3\2\5\2\13\n\2\3\3\3\3")
-        buf.write("\3\3\3\3\3\3\5\3\22\n\3\3\3\2\2\4\2\4\2\2\23\2\n\3\2\2")
-        buf.write("\2\4\21\3\2\2\2\6\7\7\4\2\2\7\b\b\2\1\2\b\13\5\4\3\2\t")
-        buf.write("\13\7\5\2\2\n\6\3\2\2\2\n\t\3\2\2\2\13\3\3\2\2\2\f\r\7")
-        buf.write("\7\2\2\r\16\5\4\3\2\16\17\b\3\1\2\17\22\3\2\2\2\20\22")
-        buf.write("\3\2\2\2\21\f\3\2\2\2\21\20\3\2\2\2\22\5\3\2\2\2\4\n\21")
+        buf.write("\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\t")
+        buf.write("\25\4\2\t\2\4\3\t\3\3\2\3\2\3\2\3\2\5\2\13\n\2\3\3\3\3")
+        buf.write("\3\3\3\3\3\3\3\3\5\3\23\n\3\3\3\2\2\4\2\4\2\2\24\2\n\3")
+        buf.write("\2\2\2\4\22\3\2\2\2\6\7\7\5\2\2\7\b\b\2\1\2\b\13\5\4\3")
+        buf.write("\2\t\13\7\6\2\2\n\6\3\2\2\2\n\t\3\2\2\2\13\3\3\2\2\2\f")
+        buf.write("\r\7\b\2\2\r\16\7\3\2\2\16\17\5\4\3\2\17\20\b\3\1\2\20")
+        buf.write("\23\3\2\2\2\21\23\7\b\2\2\22\f\3\2\2\2\22\21\3\2\2\2\23")
+        buf.write("\5\3\2\2\2\4\n\22")
         return buf.getvalue()
 
 
@@ -25,10 +26,11 @@ class SQLParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ "<INVALID>", "<INVALID>", "'SELECT'", "'FROM'", "'WHERE'" ]
+    literalNames = [ "<INVALID>", "','", "<INVALID>", "'SELECT'", "'FROM'", 
+                     "'WHERE'" ]
 
-    symbolicNames = [ "<INVALID>", "WS", "SELECT", "FROM", "WHERE", "COLUNA", 
-                      "TABELA" ]
+    symbolicNames = [ "<INVALID>", "<INVALID>", "WS", "SELECT", "FROM", 
+                      "WHERE", "COLUNA", "TABELA" ]
 
     RULE_sql_expr = 0
     RULE_clausulaSelect = 1
@@ -36,12 +38,13 @@ class SQLParser ( Parser ):
     ruleNames =  [ "sql_expr", "clausulaSelect" ]
 
     EOF = Token.EOF
-    WS=1
-    SELECT=2
-    FROM=3
-    WHERE=4
-    COLUNA=5
-    TABELA=6
+    T__0=1
+    WS=2
+    SELECT=3
+    FROM=4
+    WHERE=5
+    COLUNA=6
+    TABELA=7
 
     def __init__(self, input:TokenStream):
         super().__init__(input)
@@ -162,22 +165,26 @@ class SQLParser ( Parser ):
         localctx = SQLParser.ClausulaSelectContext(self, self._ctx, self.state)
         self.enterRule(localctx, 2, self.RULE_clausulaSelect)
         try:
-            self.state = 15
-            token = self._input.LA(1)
-            if token in [SQLParser.COLUNA]:
+            self.state = 16
+            self._errHandler.sync(self);
+            la_ = self._interp.adaptivePredict(self._input,1,self._ctx)
+            if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 10
                 self.match(SQLParser.COLUNA)
                 self.state = 11
+                self.match(SQLParser.T__0)
+                self.state = 12
                 localctx.c1 = localctx._clausulaSelect = self.clausulaSelect()
                 print(self._input.getText((localctx.start, self._input.LT(-1))))
+                pass
 
-            elif token in [SQLParser.EOF]:
+            elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
+                self.state = 15
+                self.match(SQLParser.COLUNA)
+                pass
 
-
-            else:
-                raise NoViableAltException(self)
 
         except RecognitionException as re:
             localctx.exception = re

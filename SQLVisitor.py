@@ -3,7 +3,7 @@ from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .SQLParser import SQLParser
 else:
-    from TrabalhoIBD.SQLParser import SQLParser
+    from SQLParser import SQLParser
 
 # This class defines a complete generic visitor for a parse tree produced by SQLParser.
 

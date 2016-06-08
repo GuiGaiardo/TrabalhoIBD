@@ -4,7 +4,7 @@ from SQLLexer import SQLLexer
 from SQLParser import SQLParser
 from antlr4 import *
 
-from TrabalhoIBD.SQLListener import SQLListener
+from SQLListener import SQLListener
 
 # from SQL.SQLListener import
 
