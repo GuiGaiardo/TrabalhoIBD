@@ -19,5 +19,25 @@ class SQLVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by SQLParser#conditionsJoin.
+    def visitConditionsJoin(self, ctx:SQLParser.ConditionsJoinContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SQLParser#joins.
+    def visitJoins(self, ctx:SQLParser.JoinsContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SQLParser#joins_.
+    def visitJoins_(self, ctx:SQLParser.Joins_Context):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SQLParser#clausulaFrom.
+    def visitClausulaFrom(self, ctx:SQLParser.ClausulaFromContext):
+        return self.visitChildren(ctx)
+
+
 
 del SQLParser

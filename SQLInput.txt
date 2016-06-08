@@ -1,1 +1,1 @@
-SELECT ola.ola
+SELECT ola.ola, lala.sj FROM ola JOIN lala ON ola.asd = lala.asdj and ola.sad = lala.sda

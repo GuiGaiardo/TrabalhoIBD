@@ -26,3 +26,39 @@ class SQLListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by SQLParser#conditionsJoin.
+    def enterConditionsJoin(self, ctx:SQLParser.ConditionsJoinContext):
+        pass
+
+    # Exit a parse tree produced by SQLParser#conditionsJoin.
+    def exitConditionsJoin(self, ctx:SQLParser.ConditionsJoinContext):
+        pass
+
+
+    # Enter a parse tree produced by SQLParser#joins.
+    def enterJoins(self, ctx:SQLParser.JoinsContext):
+        pass
+
+    # Exit a parse tree produced by SQLParser#joins.
+    def exitJoins(self, ctx:SQLParser.JoinsContext):
+        pass
+
+
+    # Enter a parse tree produced by SQLParser#joins_.
+    def enterJoins_(self, ctx:SQLParser.Joins_Context):
+        pass
+
+    # Exit a parse tree produced by SQLParser#joins_.
+    def exitJoins_(self, ctx:SQLParser.Joins_Context):
+        pass
+
+
+    # Enter a parse tree produced by SQLParser#clausulaFrom.
+    def enterClausulaFrom(self, ctx:SQLParser.ClausulaFromContext):
+        pass
+
+    # Exit a parse tree produced by SQLParser#clausulaFrom.
+    def exitClausulaFrom(self, ctx:SQLParser.ClausulaFromContext):
+        pass
+
+
