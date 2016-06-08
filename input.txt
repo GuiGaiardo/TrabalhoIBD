@@ -1,0 +1,1 @@
+(P tabela.campo, tabela.campo (S tabela.x = tabela.y and tabela.x = tabela.z (tabela)))
