@@ -5,12 +5,30 @@ if __name__ is not None and "." in __name__:
 else:
     from SQLParser import SQLParser
 
+print("Helo")
+
+
 # This class defines a complete generic visitor for a parse tree produced by SQLParser.
 
 class SQLVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by SQLParser#sql_expr.
     def visitSql_expr(self, ctx:SQLParser.Sql_exprContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SQLParser#comparisonOp.
+    def visitComparisonOp(self, ctx:SQLParser.ComparisonOpContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SQLParser#conditionsWhere.
+    def visitConditionsWhere(self, ctx:SQLParser.ConditionsWhereContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SQLParser#where.
+    def visitWhere(self, ctx:SQLParser.WhereContext):
         return self.visitChildren(ctx)
 
 

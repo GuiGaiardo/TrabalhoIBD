@@ -5,6 +5,9 @@ if __name__ is not None and "." in __name__:
 else:
     from SQLParser import SQLParser
 
+print("Helo")
+
+
 # This class defines a complete listener for a parse tree produced by SQLParser.
 class SQLListener(ParseTreeListener):
 
@@ -14,6 +17,33 @@ class SQLListener(ParseTreeListener):
 
     # Exit a parse tree produced by SQLParser#sql_expr.
     def exitSql_expr(self, ctx:SQLParser.Sql_exprContext):
+        pass
+
+
+    # Enter a parse tree produced by SQLParser#comparisonOp.
+    def enterComparisonOp(self, ctx:SQLParser.ComparisonOpContext):
+        pass
+
+    # Exit a parse tree produced by SQLParser#comparisonOp.
+    def exitComparisonOp(self, ctx:SQLParser.ComparisonOpContext):
+        pass
+
+
+    # Enter a parse tree produced by SQLParser#conditionsWhere.
+    def enterConditionsWhere(self, ctx:SQLParser.ConditionsWhereContext):
+        pass
+
+    # Exit a parse tree produced by SQLParser#conditionsWhere.
+    def exitConditionsWhere(self, ctx:SQLParser.ConditionsWhereContext):
+        pass
+
+
+    # Enter a parse tree produced by SQLParser#where.
+    def enterWhere(self, ctx:SQLParser.WhereContext):
+        pass
+
+    # Exit a parse tree produced by SQLParser#where.
+    def exitWhere(self, ctx:SQLParser.WhereContext):
         pass
 
 
