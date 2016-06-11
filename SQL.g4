@@ -23,9 +23,9 @@ print("Found "+ str(number) + " conditions on where")
 comparisonOp: '>='|'<='| '>'| '<' | '=';
 
 conditionsWhere returns[number]
-: COLUNA comparisonOp COLUNA 'and' c1=conditionsWhere {$number = $c1.number + 1}
-|  COLUNA comparisonOp COLUNA 'or' c1=conditionsWhere  {$number = $c1.number + 1}
-| COLUNA comparisonOp COLUNA {$number = 1} ;
+: (COLUNA | ATRIBUTO) comparisonOp (COLUNA | ATRIBUTO) 'and' c1=conditionsWhere {$number = $c1.number + 1}
+|  (COLUNA | ATRIBUTO) comparisonOp (COLUNA | ATRIBUTO) 'or' c1=conditionsWhere  {$number = $c1.number + 1}
+| (COLUNA | ATRIBUTO) comparisonOp (COLUNA | ATRIBUTO) {$number = 1} ;
 
 where returns[number, bla]
 : WHERE conditionsWhere {$number = $conditionsWhere.number
@@ -53,6 +53,7 @@ WHERE  : W H E R E;
 JOIN   : J O I N;
 ON     : O N;
 
+ATRIBUTO : ('a'..'z' |'A'..'Z' )+ | ('0' .. '9')+ ('.' ('0' .. '9')+ | );
 COLUNA : ('a'..'z' |'A'..'Z' )('a'..'z' |'A'..'Z' | '0' .. '9')*'.'('a'..'z' |'A'..'Z' )('a'..'z' |'A'..'Z' | '0' .. '9')*;
 TABELA : ('a'..'z' |'A'..'Z' )('a'..'z' |'A'..'Z' | '0' .. '9')*;
 
