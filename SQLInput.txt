@@ -1,2 +1,2 @@
 select ola.ola, lala.sj FROM ola JOIN lala ON ola.asd = lala.asdj and ola.sad = lala.sda
-WHERE 1 = 1 and ala.al > ase.asasdasd or sd.cla = sr.er
+WHERE a.b = 1 and ala.al > ase.asasdasd or sd.cla = sr.er

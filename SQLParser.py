@@ -4,42 +4,42 @@ from antlr4 import *
 from io import StringIO
 
 
-print("Helo")
+print("Helllo")
 
 def serializedATN():
     with StringIO() as buf:
         buf.write("\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\23")
-        buf.write("j\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b")
+        buf.write("i\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b")
         buf.write("\t\b\4\t\t\t\4\n\t\n\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3")
         buf.write("\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4")
         buf.write("\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5\4\62\n\4\3\5\3\5\3\5\3")
-        buf.write("\5\3\5\5\59\n\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6B\n\6\3")
-        buf.write("\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\5\7O\n\7\3")
-        buf.write("\b\3\b\3\b\3\b\3\b\3\b\3\b\3\t\3\t\3\t\3\t\3\t\5\t]\n")
-        buf.write("\t\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\5\nh\n\n\3\n\2")
-        buf.write("\2\13\2\4\6\b\n\f\16\20\22\2\4\3\2\3\7\3\2\21\22i\2\24")
-        buf.write("\3\2\2\2\4\34\3\2\2\2\6\61\3\2\2\2\b8\3\2\2\2\nA\3\2\2")
-        buf.write("\2\fN\3\2\2\2\16P\3\2\2\2\20\\\3\2\2\2\22g\3\2\2\2\24")
-        buf.write("\25\7\f\2\2\25\26\b\2\1\2\26\27\5\n\6\2\27\30\7\r\2\2")
-        buf.write("\30\31\5\22\n\2\31\32\5\b\5\2\32\33\b\2\1\2\33\3\3\2\2")
-        buf.write("\2\34\35\t\2\2\2\35\5\3\2\2\2\36\37\t\3\2\2\37 \5\4\3")
-        buf.write("\2 !\t\3\2\2!\"\7\b\2\2\"#\5\6\4\2#$\b\4\1\2$\62\3\2\2")
-        buf.write("\2%&\t\3\2\2&\'\5\4\3\2\'(\t\3\2\2()\7\t\2\2)*\5\6\4\2")
-        buf.write("*+\b\4\1\2+\62\3\2\2\2,-\t\3\2\2-.\5\4\3\2./\t\3\2\2/")
-        buf.write("\60\b\4\1\2\60\62\3\2\2\2\61\36\3\2\2\2\61%\3\2\2\2\61")
-        buf.write(",\3\2\2\2\62\7\3\2\2\2\63\64\7\16\2\2\64\65\5\6\4\2\65")
-        buf.write("\66\b\5\1\2\669\3\2\2\2\679\b\5\1\28\63\3\2\2\28\67\3")
-        buf.write("\2\2\29\t\3\2\2\2:;\7\22\2\2;<\7\n\2\2<=\5\n\6\2=>\b\6")
-        buf.write("\1\2>B\3\2\2\2?@\7\22\2\2@B\b\6\1\2A:\3\2\2\2A?\3\2\2")
-        buf.write("\2B\13\3\2\2\2CD\7\22\2\2DE\7\7\2\2EF\7\22\2\2FG\7\b\2")
-        buf.write("\2GH\5\f\7\2HI\b\7\1\2IO\3\2\2\2JK\7\22\2\2KL\7\7\2\2")
-        buf.write("LM\7\22\2\2MO\b\7\1\2NC\3\2\2\2NJ\3\2\2\2O\r\3\2\2\2P")
-        buf.write("Q\7\23\2\2QR\7\17\2\2RS\7\23\2\2ST\7\20\2\2TU\5\f\7\2")
-        buf.write("UV\5\20\t\2V\17\3\2\2\2WX\7\17\2\2XY\7\23\2\2YZ\7\20\2")
-        buf.write("\2Z]\5\f\7\2[]\3\2\2\2\\W\3\2\2\2\\[\3\2\2\2]\21\3\2\2")
-        buf.write("\2^_\7\23\2\2_`\7\n\2\2`h\5\22\n\2ah\5\16\b\2bc\5\16\b")
-        buf.write("\2cd\7\n\2\2de\5\22\n\2eh\3\2\2\2fh\7\23\2\2g^\3\2\2\2")
-        buf.write("ga\3\2\2\2gb\3\2\2\2gf\3\2\2\2h\23\3\2\2\2\b\618AN\\g")
+        buf.write("\5\3\5\5\59\n\5\3\6\3\6\3\6\3\6\3\6\3\6\5\6A\n\6\3\7\3")
+        buf.write("\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\5\7N\n\7\3\b\3")
+        buf.write("\b\3\b\3\b\3\b\3\b\3\b\3\t\3\t\3\t\3\t\3\t\5\t\\\n\t\3")
+        buf.write("\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\5\ng\n\n\3\n\2\2\13")
+        buf.write("\2\4\6\b\n\f\16\20\22\2\4\3\2\3\7\3\2\21\22h\2\24\3\2")
+        buf.write("\2\2\4\34\3\2\2\2\6\61\3\2\2\2\b8\3\2\2\2\n@\3\2\2\2\f")
+        buf.write("M\3\2\2\2\16O\3\2\2\2\20[\3\2\2\2\22f\3\2\2\2\24\25\7")
+        buf.write("\f\2\2\25\26\b\2\1\2\26\27\5\n\6\2\27\30\7\r\2\2\30\31")
+        buf.write("\5\22\n\2\31\32\5\b\5\2\32\33\b\2\1\2\33\3\3\2\2\2\34")
+        buf.write("\35\t\2\2\2\35\5\3\2\2\2\36\37\t\3\2\2\37 \5\4\3\2 !\t")
+        buf.write("\3\2\2!\"\7\b\2\2\"#\5\6\4\2#$\b\4\1\2$\62\3\2\2\2%&\t")
+        buf.write("\3\2\2&\'\5\4\3\2\'(\t\3\2\2()\7\t\2\2)*\5\6\4\2*+\b\4")
+        buf.write("\1\2+\62\3\2\2\2,-\t\3\2\2-.\5\4\3\2./\t\3\2\2/\60\b\4")
+        buf.write("\1\2\60\62\3\2\2\2\61\36\3\2\2\2\61%\3\2\2\2\61,\3\2\2")
+        buf.write("\2\62\7\3\2\2\2\63\64\7\16\2\2\64\65\5\6\4\2\65\66\b\5")
+        buf.write("\1\2\669\3\2\2\2\679\b\5\1\28\63\3\2\2\28\67\3\2\2\29")
+        buf.write("\t\3\2\2\2:;\7\22\2\2;<\7\n\2\2<=\5\n\6\2=>\b\6\1\2>A")
+        buf.write("\3\2\2\2?A\7\22\2\2@:\3\2\2\2@?\3\2\2\2A\13\3\2\2\2BC")
+        buf.write("\7\22\2\2CD\7\7\2\2DE\7\22\2\2EF\7\b\2\2FG\5\f\7\2GH\b")
+        buf.write("\7\1\2HN\3\2\2\2IJ\7\22\2\2JK\7\7\2\2KL\7\22\2\2LN\b\7")
+        buf.write("\1\2MB\3\2\2\2MI\3\2\2\2N\r\3\2\2\2OP\7\23\2\2PQ\7\17")
+        buf.write("\2\2QR\7\23\2\2RS\7\20\2\2ST\5\f\7\2TU\5\20\t\2U\17\3")
+        buf.write("\2\2\2VW\7\17\2\2WX\7\23\2\2XY\7\20\2\2Y\\\5\f\7\2Z\\")
+        buf.write("\3\2\2\2[V\3\2\2\2[Z\3\2\2\2\\\21\3\2\2\2]^\7\23\2\2^")
+        buf.write("_\7\n\2\2_g\5\22\n\2`g\5\16\b\2ab\5\16\b\2bc\7\n\2\2c")
+        buf.write("d\5\22\n\2dg\3\2\2\2eg\7\23\2\2f]\3\2\2\2f`\3\2\2\2fa")
+        buf.write("\3\2\2\2fe\3\2\2\2g\23\3\2\2\2\b\618@M[f")
         return buf.getvalue()
 
 
@@ -436,7 +436,6 @@ class SQLParser ( Parser ):
             self.parser = parser
             self.c1 = None # ClausulaSelectContext
             self._clausulaSelect = None # ClausulaSelectContext
-            self._COLUNA = None # Token
 
         def COLUNA(self):
             return self.getToken(SQLParser.COLUNA, 0)
@@ -470,7 +469,7 @@ class SQLParser ( Parser ):
         localctx = SQLParser.ClausulaSelectContext(self, self._ctx, self.state)
         self.enterRule(localctx, 8, self.RULE_clausulaSelect)
         try:
-            self.state = 63
+            self.state = 62
             self._errHandler.sync(self);
             la_ = self._interp.adaptivePredict(self._input,2,self._ctx)
             if la_ == 1:
@@ -481,14 +480,13 @@ class SQLParser ( Parser ):
                 self.match(SQLParser.T__7)
                 self.state = 58
                 localctx.c1 = localctx._clausulaSelect = self.clausulaSelect()
-                print(self._input.getText((localctx.start, self._input.LT(-1))))
+                print("Coluna " + self._input.getText((localctx.start, self._input.LT(-1))))
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 61
-                localctx._COLUNA = self.match(SQLParser.COLUNA)
-                print((None if localctx._COLUNA is None else localctx._COLUNA.text))
+                self.match(SQLParser.COLUNA)
                 pass
 
 
@@ -541,31 +539,31 @@ class SQLParser ( Parser ):
         localctx = SQLParser.ConditionsJoinContext(self, self._ctx, self.state)
         self.enterRule(localctx, 10, self.RULE_conditionsJoin)
         try:
-            self.state = 76
+            self.state = 75
             self._errHandler.sync(self);
             la_ = self._interp.adaptivePredict(self._input,3,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
+                self.state = 64
+                self.match(SQLParser.COLUNA)
                 self.state = 65
-                self.match(SQLParser.COLUNA)
-                self.state = 66
                 self.match(SQLParser.T__4)
-                self.state = 67
+                self.state = 66
                 self.match(SQLParser.COLUNA)
-                self.state = 68
+                self.state = 67
                 self.match(SQLParser.T__5)
-                self.state = 69
+                self.state = 68
                 self.conditionsJoin()
                 print(self._input.getText((localctx.start, self._input.LT(-1))))
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 72
+                self.state = 71
                 self.match(SQLParser.COLUNA)
-                self.state = 73
+                self.state = 72
                 self.match(SQLParser.T__4)
-                self.state = 74
+                self.state = 73
                 self.match(SQLParser.COLUNA)
                 print(self._input.getText((localctx.start, self._input.LT(-1))))
                 pass
@@ -631,17 +629,17 @@ class SQLParser ( Parser ):
         self.enterRule(localctx, 12, self.RULE_joins)
         try:
             self.enterOuterAlt(localctx, 1)
+            self.state = 77
+            self.match(SQLParser.TABELA)
             self.state = 78
-            self.match(SQLParser.TABELA)
-            self.state = 79
             self.match(SQLParser.JOIN)
-            self.state = 80
+            self.state = 79
             self.match(SQLParser.TABELA)
-            self.state = 81
+            self.state = 80
             self.match(SQLParser.ON)
-            self.state = 82
+            self.state = 81
             self.conditionsJoin()
-            self.state = 83
+            self.state = 82
             self.joins_()
         except RecognitionException as re:
             localctx.exception = re
@@ -695,17 +693,17 @@ class SQLParser ( Parser ):
         localctx = SQLParser.Joins_Context(self, self._ctx, self.state)
         self.enterRule(localctx, 14, self.RULE_joins_)
         try:
-            self.state = 90
+            self.state = 89
             token = self._input.LA(1)
             if token in [SQLParser.JOIN]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 85
+                self.state = 84
                 self.match(SQLParser.JOIN)
-                self.state = 86
+                self.state = 85
                 self.match(SQLParser.TABELA)
-                self.state = 87
+                self.state = 86
                 self.match(SQLParser.ON)
-                self.state = 88
+                self.state = 87
                 self.conditionsJoin()
 
             elif token in [SQLParser.EOF, SQLParser.T__7, SQLParser.WHERE]:
@@ -765,38 +763,38 @@ class SQLParser ( Parser ):
         localctx = SQLParser.ClausulaFromContext(self, self._ctx, self.state)
         self.enterRule(localctx, 16, self.RULE_clausulaFrom)
         try:
-            self.state = 101
+            self.state = 100
             self._errHandler.sync(self);
             la_ = self._interp.adaptivePredict(self._input,5,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 92
+                self.state = 91
                 self.match(SQLParser.TABELA)
-                self.state = 93
+                self.state = 92
                 self.match(SQLParser.T__7)
-                self.state = 94
+                self.state = 93
                 self.clausulaFrom()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 95
+                self.state = 94
                 self.joins()
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 96
+                self.state = 95
                 self.joins()
-                self.state = 97
+                self.state = 96
                 self.match(SQLParser.T__7)
-                self.state = 98
+                self.state = 97
                 self.clausulaFrom()
                 pass
 
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 100
+                self.state = 99
                 self.match(SQLParser.TABELA)
                 pass
 

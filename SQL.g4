@@ -5,7 +5,7 @@ options{
 }
 
 @header{
-print("Helo")
+print("Helllo")
 }
 
 
@@ -32,7 +32,7 @@ where returns[number, bla]
 $bla = "asd"}
    | {$number = 0};
 
-clausulaSelect : COLUNA ',' c1=clausulaSelect {print($clausulaSelect.text)}| COLUNA {print($COLUNA.text)};
+clausulaSelect : COLUNA ',' c1=clausulaSelect {print("Coluna " + $clausulaSelect.text)}| COLUNA;
 
 conditionsJoin : COLUNA '=' COLUNA 'and' conditionsJoin {print($text)} | COLUNA '=' COLUNA {print($text)};
 
@@ -40,7 +40,7 @@ joins : TABELA JOIN TABELA ON conditionsJoin joins_ ;
 joins_: JOIN TABELA ON conditionsJoin
         | ;
 
-clausulaFrom : TABELA ',' clausulaFrom | joins | joins ',' clausulaFrom |TABELA;
+clausulaFrom : TABELA ',' clausulaFrom | joins | joins ',' clausulaFrom | TABELA;
 
 
 WS: [ \n\t\r]+ -> channel(HIDDEN);
@@ -53,7 +53,7 @@ WHERE  : W H E R E;
 JOIN   : J O I N;
 ON     : O N;
 
-ATRIBUTO : ('a'..'z' |'A'..'Z' )+ | ('0' .. '9')+ ('.' ('0' .. '9')+ | );
+ATRIBUTO : '\'' ('a'..'z' |'A'..'Z' )+ '\'' | ('0' .. '9')+ ('.' ('0' .. '9')+ | );
 COLUNA : ('a'..'z' |'A'..'Z' )('a'..'z' |'A'..'Z' | '0' .. '9')*'.'('a'..'z' |'A'..'Z' )('a'..'z' |'A'..'Z' | '0' .. '9')*;
 TABELA : ('a'..'z' |'A'..'Z' )('a'..'z' |'A'..'Z' | '0' .. '9')*;
 

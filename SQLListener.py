@@ -5,7 +5,7 @@ if __name__ is not None and "." in __name__:
 else:
     from SQLParser import SQLParser
 
-print("Helo")
+print("Helllo")
 
 
 # This class defines a complete listener for a parse tree produced by SQLParser.
