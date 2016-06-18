@@ -5,7 +5,8 @@ if __name__ is not None and "." in __name__:
 else:
     from SQLParser import SQLParser
 
-print("Helllo")
+from QueryTree import *
+query_tree = QueryTree()
 
 
 # This class defines a complete listener for a parse tree produced by SQLParser.
@@ -89,6 +90,24 @@ class SQLListener(ParseTreeListener):
 
     # Exit a parse tree produced by SQLParser#clausulaFrom.
     def exitClausulaFrom(self, ctx:SQLParser.ClausulaFromContext):
+        pass
+
+
+    # Enter a parse tree produced by SQLParser#termo.
+    def enterTermo(self, ctx:SQLParser.TermoContext):
+        pass
+
+    # Exit a parse tree produced by SQLParser#termo.
+    def exitTermo(self, ctx:SQLParser.TermoContext):
+        pass
+
+
+    # Enter a parse tree produced by SQLParser#conector.
+    def enterConector(self, ctx:SQLParser.ConectorContext):
+        pass
+
+    # Exit a parse tree produced by SQLParser#conector.
+    def exitConector(self, ctx:SQLParser.ConectorContext):
         pass
 
 

@@ -1,9 +1,9 @@
 import sys
 
 from SQLLexer import SQLLexer
-from SQLParser import SQLParser
 from antlr4 import *
 
+from SQLParser import *
 from SQLListener import SQLListener
 
 # from SQL.SQLListener import
@@ -15,7 +15,6 @@ class KeyPrinter(SQLListener):
 
     # Exit a parse tree produced by SQLParser#sql_expr.
     def exitSql_expr(self, ctx: SQLParser.Sql_exprContext):
-        print("Bla")
         pass
 
 
@@ -28,6 +27,8 @@ def main(argv):
     printer = KeyPrinter()
     walker = ParseTreeWalker()
     walker.walk(printer, tree)
+
+    print(str(query_tree.root))
 
 
 #

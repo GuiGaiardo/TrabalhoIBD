@@ -5,7 +5,8 @@ if __name__ is not None and "." in __name__:
 else:
     from SQLParser import SQLParser
 
-print("Helllo")
+from QueryTree import *
+query_tree = QueryTree()
 
 
 # This class defines a complete generic visitor for a parse tree produced by SQLParser.
@@ -54,6 +55,16 @@ class SQLVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by SQLParser#clausulaFrom.
     def visitClausulaFrom(self, ctx:SQLParser.ClausulaFromContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SQLParser#termo.
+    def visitTermo(self, ctx:SQLParser.TermoContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SQLParser#conector.
+    def visitConector(self, ctx:SQLParser.ConectorContext):
         return self.visitChildren(ctx)
 
 
