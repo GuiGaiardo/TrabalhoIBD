@@ -49,3 +49,11 @@ Root:
             Button:
                 text: "Load"
                 on_release: root.load(filechooser.path, filechooser.selection)
+
+
+<TreePrinter>:
+    orientation: "vertical"
+    Button:
+        text: "Close"
+        size_hint: (1,.10)
+        on_release: root.close()

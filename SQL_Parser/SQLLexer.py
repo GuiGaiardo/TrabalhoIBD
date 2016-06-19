@@ -3,7 +3,7 @@ from antlr4 import *
 from io import StringIO
 
 
-from QueryTree import *
+from SQL_Parser.QueryTree import *
 query_tree = QueryTree()
 
 

@@ -4,7 +4,7 @@ from antlr4 import *
 from io import StringIO
 
 
-from QueryTree import *
+from SQL_Parser.QueryTree import *
 query_tree = QueryTree()
 
 def serializedATN():
@@ -145,12 +145,6 @@ class SQLParser ( Parser ):
             if hasattr( listener, "exitSql_expr" ):
                 listener.exitSql_expr(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitSql_expr" ):
-                return visitor.visitSql_expr(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
@@ -212,12 +206,6 @@ class SQLParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitComparisonOp" ):
                 listener.exitComparisonOp(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitComparisonOp" ):
-                return visitor.visitComparisonOp(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -290,12 +278,6 @@ class SQLParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitConditionsWhere" ):
                 listener.exitConditionsWhere(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitConditionsWhere" ):
-                return visitor.visitConditionsWhere(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -379,12 +361,6 @@ class SQLParser ( Parser ):
             if hasattr( listener, "exitWhere" ):
                 listener.exitWhere(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitWhere" ):
-                return visitor.visitWhere(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
@@ -446,12 +422,6 @@ class SQLParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitClausulaSelect" ):
                 listener.exitClausulaSelect(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitClausulaSelect" ):
-                return visitor.visitClausulaSelect(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -528,12 +498,6 @@ class SQLParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitConditionsJoin" ):
                 listener.exitConditionsJoin(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitConditionsJoin" ):
-                return visitor.visitConditionsJoin(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -627,12 +591,6 @@ class SQLParser ( Parser ):
             if hasattr( listener, "exitJoins" ):
                 listener.exitJoins(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitJoins" ):
-                return visitor.visitJoins(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
@@ -701,12 +659,6 @@ class SQLParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitJoins_" ):
                 listener.exitJoins_(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitJoins_" ):
-                return visitor.visitJoins_(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -779,12 +731,6 @@ class SQLParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitClausulaFrom" ):
                 listener.exitClausulaFrom(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitClausulaFrom" ):
-                return visitor.visitClausulaFrom(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -875,12 +821,6 @@ class SQLParser ( Parser ):
             if hasattr( listener, "exitTermo" ):
                 listener.exitTermo(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitTermo" ):
-                return visitor.visitTermo(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
@@ -926,12 +866,6 @@ class SQLParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitConector" ):
                 listener.exitConector(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitConector" ):
-                return visitor.visitConector(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 

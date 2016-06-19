@@ -1,12 +1,11 @@
 import sys
 
-from SQLLexer import SQLLexer
+from SQL_Parser.SQLLexer import SQLLexer
 from antlr4 import *
 
-from SQLParser import *
-from SQLListener import SQLListener
+from SQL_Parser.SQLParser import *
+from SQL_Parser.SQLListener import SQLListener
 
-# from SQL.SQLListener import
 
 class KeyPrinter(SQLListener):
     # Enter a parse tree produced by SQLParser#sql_expr.
@@ -18,9 +17,11 @@ class KeyPrinter(SQLListener):
         pass
 
 
-def main(argv):
-    input = FileStream(argv[1])
-    lexer = SQLLexer(input)
+def main(input):
+    with open("tmp", "w") as input_file:
+        input_file.write(input)
+    input_file = FileStream("tmp")
+    lexer = SQLLexer(input_file)
     stream = CommonTokenStream(lexer)
     parser = SQLParser(stream)
     tree = parser.sql_expr()
@@ -28,7 +29,7 @@ def main(argv):
     walker = ParseTreeWalker()
     walker.walk(printer, tree)
 
-    print(str(query_tree.root))
+    return query_tree
 
 
 #

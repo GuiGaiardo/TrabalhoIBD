@@ -1,11 +1,14 @@
 import kivy
-kivy.require('1.0.6')
+kivy.require('1.9.1')
 
 from kivy.app import App
 from kivy.uix.floatlayout import FloatLayout
 from kivy.factory import Factory
 from kivy.properties import ObjectProperty
 from kivy.uix.popup import Popup
+from TreePrinter import TreePrinter
+from SQL_Parser import SQLMain
+
 
 import os
 
@@ -36,21 +39,28 @@ class Root(FloatLayout):
         self.dismiss_popup()
 
     def parse_query(self):
+        tree = SQLMain.main(self.text_input.text)
+        printer = TreePrinter.TreePrinter(query_tree=tree, close=self.dismiss_popup)
+        printer.draw_tree()
+        self._popup = Popup(title="Query Tree", content=printer)
+        self._popup.open()
+
         #faz as analises
-        try:
-            #query_tree = QueryChecker(self.text_input.text)
-            self.is_valid = True
-        except QueryLexicalError:
-            self.is_valid = False
-            #msg de erro lexico
-        except QuerySyntaxError:
-            self.is_valid = False
+        # try:
+        #     #query_tree = QueryChecker(self.text_input.text)
+        #     self.is_valid = True
+        # except QueryLexicalError:
+        #     self.is_valid = False
+        #     #msg de erro lexico
+        # except QuerySyntaxError:
+        #     self.is_valid = False
 
 
     def show_tree(self):
         if self.is_valid:
             pass
-            #show tree
+            # printer = TreePrinter(query_tree)
+
 
     def show_optimized_tree(self):
         if self.is_valid:
@@ -67,6 +77,7 @@ class QueryTree(App):
 
 Factory.register('Root', cls=Root)
 Factory.register('LoadDialog', cls=LoadDialog)
+Factory.register('TreePrinter', cls=TreePrinter)
 
 if __name__ == '__main__':
     QueryTree().run()
