@@ -54,9 +54,14 @@ class SelectionOptimizer:
             left_table = left.get_description()
             tables = [left_table]
             terms = []
+            print('AQUI')
+            print(unaries)
             for term in unaries:
                 if term[0] == left_table:
-                    terms.append(unaries.pop(unaries.index(term))[1])
+                    terms.append(term[1])
+            print(terms)
+
+
 
 
             if len(terms) > 0:
@@ -82,7 +87,6 @@ class SelectionOptimizer:
 
         else:
             print("deu merda")
-        print(right)
         if isinstance(right, Table):
             right_table = right.get_description()
             tables.append(right_table)
