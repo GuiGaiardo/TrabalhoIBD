@@ -9,6 +9,8 @@ from kivy.uix.popup import Popup
 from TreePrinter import TreePrinter
 from SQL_Parser import SQLMain
 
+from Optimization.SelectionOptmizer import *
+
 
 import os
 
@@ -40,6 +42,11 @@ class Root(FloatLayout):
 
     def parse_query(self):
         tree = SQLMain.main(self.text_input.text)
+        print(str(tree.root))
+        s = SelectionOptimizer(tree)
+        tree.root = s.optimize()
+        print(str(tree.root))
+
         printer = TreePrinter.TreePrinter(query_tree=tree, close=self.dismiss_popup)
         printer.draw_tree()
         self._popup = Popup(title="Query Tree", content=printer)

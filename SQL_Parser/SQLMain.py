@@ -5,6 +5,10 @@ from antlr4 import *
 
 from SQL_Parser.SQLParser import *
 from SQL_Parser.SQLListener import SQLListener
+# from SQLLexer import SQLLexer
+# from antlr4 import *
+# from SQLParser import *
+# from SQLListener import SQLListener
 
 
 class KeyPrinter(SQLListener):

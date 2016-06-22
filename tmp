@@ -1,3 +1,3 @@
 select funcionario.nomeFunc, projetos.nomeProj
-FROM funcionario JOIN projetos ON funcionario.idProj = projetos.idProj
-WHERE funcionario.salario > 4000 and projetos.duracao = 10
+FROM funcionario, projetos, coisas
+WHERE coisas.xis = 'ao' and funcionario.salario > 4000 and projetos.duracao = 10 and projetos.duracao = 11 or funcionario.depto = 100

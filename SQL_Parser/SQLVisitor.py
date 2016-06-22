@@ -5,7 +5,7 @@ if __name__ is not None and "." in __name__:
 else:
     from SQLParser import SQLParser
 
-from QueryTree import *
+from SQL_Parser.QueryTree import *
 query_tree = QueryTree()
 
 

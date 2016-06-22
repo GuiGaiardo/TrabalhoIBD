@@ -4,7 +4,6 @@ class QueryTree():
     def __init__(self):
         return
 
-
     def set_root(self, node):
         self.root = node
 
@@ -19,33 +18,35 @@ class SelectionNode():
         self.children = None
 
 
+
     def __str__(self):
         text = "S"
         if (len(self.terms) == 1):
-            text += " " + self.terms[0]
+            text += " " + self.terms[0][0] + self.terms[0][1] + self.terms[0][2]
 
         else:
-            for i in range(len(self.terms)-1):
-                text += " " + self.terms[i] + " " + self.conectors[i]
+            for i in range(len(self.conectors)):
+                text += " " + self.terms[i][0] + self.terms[i][1] + self.terms[i][2] + " " + self.conectors[i]
 
-            text += " " + self.terms[i+1]
+            text += " " + self.terms[i+1][0] + self.terms[i+1][1] + self.terms[i+1][2]
 
         text += " (" + str(self.children) + ")"
 
         return text
 
 
+
     def get_description(self):
         description = ""
 
         if (len(self.terms) == 1):
-            description += self.terms[0]
+            description += self.terms[0][0] + self.terms[0][1] + self.terms[0][2]
 
         else:
             for i in range(len(self.conectors)):
-                description += " " + self.terms[i] + " " + self.conectors[i]
+                description += " " + self.terms[i][0] + self.terms[i][1] + self.terms[i][2] + " " + self.conectors[i]
 
-            description += " " + self.terms[i+1]
+            description += " " + self.terms[i+1][0] + self.terms[i+1][1] + self.terms[i+1][2]
 
         return description
 
@@ -87,6 +88,7 @@ class ThetaJoinNode():
         self.terms = terms
         self.conectors = conectors
 
+
     def __str__(self):
         text = "(" + str(self.children[0]) + ")"
 
@@ -105,6 +107,7 @@ class ThetaJoinNode():
         text += " (" + str(self.children[1]) + ")"
 
         return text
+
 
     def get_description(self):
         description = ""

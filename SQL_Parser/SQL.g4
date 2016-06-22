@@ -5,7 +5,7 @@ options{
 }
 
 @header{
-from QueryTree import *
+from SQL_Parser.QueryTree import *
 query_tree = QueryTree()
 }
 
@@ -34,11 +34,12 @@ comparisonOp: '>='|'<='| '>'| '<' | '=';
 conditionsWhere returns[number, terms, conectors]
 : t=termo c=conector cnd=conditionsWhere {$number = $cnd.number + 1
 $terms = $cnd.terms
-$terms.append($t.text)
+$terms.append($t.term)
 $conectors = $cnd.conectors
 $conectors.append($c.text)}
-| COLUNA comparisonOp (COLUNA | ATRIBUTO) {$number = 1
-$terms = [$text]
+| t=termo {$number = 1
+print(str($t.term))
+$terms = [$t.term]
 $conectors = []} ;
 
 where returns[number, terms, conectors]
@@ -76,7 +77,8 @@ $tj = join}
 | TABELA {table = Table($text)
 $tj = table};
 
-termo : COLUNA comparisonOp (COLUNA | ATRIBUTO);
+termo returns[term] : t1=COLUNA o=comparisonOp t2=COLUNA {$term = ($t1.text,$o.text,$t2.text)}
+| t=COLUNA o=comparisonOp a=ATRIBUTO {$term = ($t.text,$o.text,$a.text)};
 conector : ('and' | 'or');
 
 
