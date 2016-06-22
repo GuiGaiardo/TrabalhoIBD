@@ -25,6 +25,21 @@ node = query_tree.root
 node.set_child(selection)
 node = node.children
 node.set_child(theta_join)
+print($sl.columns)
+
+selectingTables = [x.split('.')[0] for x in $sl.columns]
+print(selectingTables)
+whereTables = [x[0].split('.')[0] for x in $w.terms]
+print($fr.tables)
+print(whereTables)
+
+for t in selectingTables:
+    if(not t in $fr.tables):
+        print("Selecting unknow table " + t)
+
+for t in whereTables:
+    if(not t in $fr.tables):
+        print("Unknown table " + t + " being used in where clause")
 }
         ;
 
@@ -58,24 +73,36 @@ $conectors.append($c.text)}
 | COLUNA '=' COLUNA {$terms = [$text]
 $conectors = []};
 
-joins returns[tj] : t1=TABELA JOIN t2=TABELA ON c=conditionsJoin j=joins_ {join1 = ThetaJoinNode(Table($t1.text), Table($t2.text), $c.terms, $c.conectors)
-if ($j.table == None):
+joins returns[tj, tables] : t1=TABELA JOIN t2=TABELA ON c=conditionsJoin j=joins_["vraa"] {join1 = ThetaJoinNode(Table($t1.text), Table($t2.text), $c.terms, $c.conectors)
+$tables = [$t1.text, $t2.text]
+if ($j.table == []):
     $tj = join1
 else:
-    $tj = ThetaJoinNode(join1, $j.table, $j.terms, $j.conectors)};
-joins_ returns[table, terms, conectors] : JOIN t=TABELA ON c=conditionsJoin {$table = $t.text
-$terms = $c.terms, $conectors = $c.conectors}
-| {$table = None
-$terms = None
-$conectors = None};
+    $tj = ThetaJoinNode(join1, $j.table, $j.terms, $j.conectors)
+    $tables += $j.table
+print("---> " + str($c.terms))};
 
-clausulaFrom returns[tj] : t1=TABELA ',' c=clausulaFrom {tab = Table($t1.text)
+joins_ [teste] returns[table, terms, conectors]  : JOIN t=TABELA ON c=conditionsJoin j=joins_[$teste] {$table = $t.text
+$terms = $c.terms
+$conectors = $c.conectors
+$table = [$t.text] + $j.table
+print($teste)}
+| {$table = []
+$terms = None
+$conectors = None
+print($teste)};
+
+clausulaFrom returns[tj, tables] : t1=TABELA ',' c=clausulaFrom {tab = Table($t1.text)
 join = ThetaJoinNode(tab, $c.tj, [','], [])
-$tj = join}
-| j=joins {$tj = $j.tj}
-| j=joins ',' c=clausulaFrom {$tj = ThetaJoinNode($j.tj, $c.tj, [','], [])}
-| TABELA {table = Table($text)
-$tj = table};
+$tj = join
+$tables = [$t1.text] + $c.tables}
+| j=joins {$tj = $j.tj
+$tables = $j.tables}
+| j=joins ',' c=clausulaFrom {$tj = ThetaJoinNode($j.tj, $c.tj, [','], [])
+$tables = $j.tables + $c.tables}
+| t=TABELA {table = Table($text)
+$tj = table
+$tables = [$t.text]};
 
 termo returns[term] : t1=COLUNA o=comparisonOp t2=COLUNA {$term = ($t1.text,$o.text,$t2.text)}
 | t=COLUNA o=comparisonOp a=ATRIBUTO {$term = ($t.text,$o.text,$a.text)};
