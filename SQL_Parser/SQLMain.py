@@ -28,6 +28,7 @@ def main(input):
     lexer = SQLLexer(input_file)
     stream = CommonTokenStream(lexer)
     parser = SQLParser(stream)
+    # parser._errHandler = BailErrorStrategy()
     tree = parser.sql_expr()
     printer = KeyPrinter()
     walker = ParseTreeWalker()

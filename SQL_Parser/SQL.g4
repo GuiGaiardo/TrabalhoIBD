@@ -16,7 +16,7 @@ number = 0
 }
 @after{
 print("Found "+ str(number) + " conditions on where")
-}: SELECT sl=clausulaSelect FROM  fr=clausulaFrom w=where {number = $w.number
+}: SELECT sl=clausulaSelect FROM  fr=clausulaFrom[ [] ] w=where {number = $w.number
 projection = ProjectionNode($sl.columns)
 selection = SelectionNode($w.terms, $w.conectors)
 theta_join = $fr.tj
@@ -73,32 +73,42 @@ $conectors.append($c.text)}
 | COLUNA '=' COLUNA {$terms = [$text]
 $conectors = []};
 
-joins returns[tj, tables] : t1=TABELA JOIN t2=TABELA ON c=conditionsJoin j=joins_["vraa"] {join1 = ThetaJoinNode(Table($t1.text), Table($t2.text), $c.terms, $c.conectors)
+joins[tablesSoFar] returns[tj, tables] : t1=TABELA JOIN t2=TABELA ON c=conditionsJoin j=joins_[$tablesSoFar + [$t1.text] + [$t2.text]] {join1 = ThetaJoinNode(Table($t1.text), Table($t2.text), $c.terms, $c.conectors)
 $tables = [$t1.text, $t2.text]
 if ($j.table == []):
     $tj = join1
 else:
     $tj = ThetaJoinNode(join1, $j.table, $j.terms, $j.conectors)
     $tables += $j.table
-print("---> " + str($c.terms))};
 
-joins_ [teste] returns[table, terms, conectors]  : JOIN t=TABELA ON c=conditionsJoin j=joins_[$teste] {$table = $t.text
+for t in $c.terms:
+    temp = t.replace(' ', '').split('=')
+    if(not temp[0].split('.')[0] in ($tablesSoFar + [$t1.text] + [$t2.text])):
+        print("Unknown table " + temp[0].split('.')[0] + " referenced in JOIN condition")
+    if(not temp[1].split('.')[0] in ($tablesSoFar + [$t1.text] + [$t2.text])):
+        print("Unknown table " + temp[1].split('.')[0] + " referenced in JOIN condition")
+};
+
+joins_ [tablesSoFar] returns[table, terms, conectors]  : JOIN t=TABELA ON c=conditionsJoin j=joins_[$tablesSoFar + [$t.text]] {$table = $t.text
 $terms = $c.terms
 $conectors = $c.conectors
 $table = [$t.text] + $j.table
-print($teste)}
+for t in $c.terms:
+    temp = t.replace(' ', '').split('=')
+    if(not temp[0].split('.')[0] in ($tablesSoFar + [$t.text])):
+        print("Unknown table " + temp[0].split('.')[0] + " referenced in JOIN condition")}
 | {$table = []
 $terms = None
-$conectors = None
-print($teste)};
+$conectors = None};
 
-clausulaFrom returns[tj, tables] : t1=TABELA ',' c=clausulaFrom {tab = Table($t1.text)
+clausulaFrom[tablesSoFar] returns[tj, tables] : t1=TABELA ',' c=clausulaFrom[$tablesSoFar + [$t1.text]]{tab = Table($t1.text)
 join = ThetaJoinNode(tab, $c.tj, [','], [])
 $tj = join
-$tables = [$t1.text] + $c.tables}
-| j=joins {$tj = $j.tj
+$tables = [$t1.text] + $c.tables
+print("---> " + str($tablesSoFar))}
+| j=joins[$tablesSoFar] {$tj = $j.tj
 $tables = $j.tables}
-| j=joins ',' c=clausulaFrom {$tj = ThetaJoinNode($j.tj, $c.tj, [','], [])
+| j=joins[$tablesSoFar] ',' c=clausulaFrom[$j.tables + $tablesSoFar ] {$tj = ThetaJoinNode($j.tj, $c.tj, [','], [])
 $tables = $j.tables + $c.tables}
 | t=TABELA {table = Table($text)
 $tj = table

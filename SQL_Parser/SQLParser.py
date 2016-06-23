@@ -10,41 +10,42 @@ query_tree = QueryTree()
 def serializedATN():
     with StringIO() as buf:
         buf.write("\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\23")
-        buf.write("y\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b")
+        buf.write("z\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b")
         buf.write("\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\3\2\3\2\3\2\3\2")
         buf.write("\3\2\3\2\3\2\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5")
         buf.write("\4*\n\4\3\5\3\5\3\5\3\5\3\5\5\5\61\n\5\3\6\3\6\3\6\3\6")
         buf.write("\3\6\3\6\3\6\5\6:\n\6\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7")
         buf.write("\3\7\3\7\3\7\5\7G\n\7\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b")
-        buf.write("\3\t\3\t\3\t\3\t\3\t\3\t\3\t\5\tX\n\t\3\n\3\n\3\n\3\n")
-        buf.write("\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\5\ni\n\n")
-        buf.write("\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\5\13")
-        buf.write("u\n\13\3\f\3\f\3\f\2\2\r\2\4\6\b\n\f\16\20\22\24\26\2")
-        buf.write("\4\3\2\3\7\3\2\t\nv\2\30\3\2\2\2\4\37\3\2\2\2\6)\3\2\2")
-        buf.write("\2\b\60\3\2\2\2\n9\3\2\2\2\fF\3\2\2\2\16H\3\2\2\2\20W")
-        buf.write("\3\2\2\2\22h\3\2\2\2\24t\3\2\2\2\26v\3\2\2\2\30\31\7\f")
-        buf.write("\2\2\31\32\5\n\6\2\32\33\7\r\2\2\33\34\5\22\n\2\34\35")
-        buf.write("\5\b\5\2\35\36\b\2\1\2\36\3\3\2\2\2\37 \t\2\2\2 \5\3\2")
-        buf.write("\2\2!\"\5\24\13\2\"#\5\26\f\2#$\5\6\4\2$%\b\4\1\2%*\3")
-        buf.write("\2\2\2&\'\5\24\13\2\'(\b\4\1\2(*\3\2\2\2)!\3\2\2\2)&\3")
-        buf.write("\2\2\2*\7\3\2\2\2+,\7\16\2\2,-\5\6\4\2-.\b\5\1\2.\61\3")
-        buf.write("\2\2\2/\61\b\5\1\2\60+\3\2\2\2\60/\3\2\2\2\61\t\3\2\2")
-        buf.write("\2\62\63\7\22\2\2\63\64\7\b\2\2\64\65\5\n\6\2\65\66\b")
-        buf.write("\6\1\2\66:\3\2\2\2\678\7\22\2\28:\b\6\1\29\62\3\2\2\2")
-        buf.write("9\67\3\2\2\2:\13\3\2\2\2;<\7\22\2\2<=\7\7\2\2=>\7\22\2")
-        buf.write("\2>?\5\26\f\2?@\5\f\7\2@A\b\7\1\2AG\3\2\2\2BC\7\22\2\2")
-        buf.write("CD\7\7\2\2DE\7\22\2\2EG\b\7\1\2F;\3\2\2\2FB\3\2\2\2G\r")
-        buf.write("\3\2\2\2HI\7\23\2\2IJ\7\17\2\2JK\7\23\2\2KL\7\20\2\2L")
-        buf.write("M\5\f\7\2MN\5\20\t\2NO\b\b\1\2O\17\3\2\2\2PQ\7\17\2\2")
-        buf.write("QR\7\23\2\2RS\7\20\2\2ST\5\f\7\2TU\b\t\1\2UX\3\2\2\2V")
-        buf.write("X\b\t\1\2WP\3\2\2\2WV\3\2\2\2X\21\3\2\2\2YZ\7\23\2\2Z")
-        buf.write("[\7\b\2\2[\\\5\22\n\2\\]\b\n\1\2]i\3\2\2\2^_\5\16\b\2")
-        buf.write("_`\b\n\1\2`i\3\2\2\2ab\5\16\b\2bc\7\b\2\2cd\5\22\n\2d")
-        buf.write("e\b\n\1\2ei\3\2\2\2fg\7\23\2\2gi\b\n\1\2hY\3\2\2\2h^\3")
-        buf.write("\2\2\2ha\3\2\2\2hf\3\2\2\2i\23\3\2\2\2jk\7\22\2\2kl\5")
-        buf.write("\4\3\2lm\7\22\2\2mn\b\13\1\2nu\3\2\2\2op\7\22\2\2pq\5")
-        buf.write("\4\3\2qr\7\21\2\2rs\b\13\1\2su\3\2\2\2tj\3\2\2\2to\3\2")
-        buf.write("\2\2u\25\3\2\2\2vw\t\3\2\2w\27\3\2\2\2\t)\609FWht")
+        buf.write("\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\5\tY\n\t\3\n\3\n\3\n")
+        buf.write("\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\5\nj")
+        buf.write("\n\n\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13")
+        buf.write("\5\13v\n\13\3\f\3\f\3\f\2\2\r\2\4\6\b\n\f\16\20\22\24")
+        buf.write("\26\2\4\3\2\3\7\3\2\t\nw\2\30\3\2\2\2\4\37\3\2\2\2\6)")
+        buf.write("\3\2\2\2\b\60\3\2\2\2\n9\3\2\2\2\fF\3\2\2\2\16H\3\2\2")
+        buf.write("\2\20X\3\2\2\2\22i\3\2\2\2\24u\3\2\2\2\26w\3\2\2\2\30")
+        buf.write("\31\7\f\2\2\31\32\5\n\6\2\32\33\7\r\2\2\33\34\5\22\n\2")
+        buf.write("\34\35\5\b\5\2\35\36\b\2\1\2\36\3\3\2\2\2\37 \t\2\2\2")
+        buf.write(" \5\3\2\2\2!\"\5\24\13\2\"#\5\26\f\2#$\5\6\4\2$%\b\4\1")
+        buf.write("\2%*\3\2\2\2&\'\5\24\13\2\'(\b\4\1\2(*\3\2\2\2)!\3\2\2")
+        buf.write("\2)&\3\2\2\2*\7\3\2\2\2+,\7\16\2\2,-\5\6\4\2-.\b\5\1\2")
+        buf.write(".\61\3\2\2\2/\61\b\5\1\2\60+\3\2\2\2\60/\3\2\2\2\61\t")
+        buf.write("\3\2\2\2\62\63\7\22\2\2\63\64\7\b\2\2\64\65\5\n\6\2\65")
+        buf.write("\66\b\6\1\2\66:\3\2\2\2\678\7\22\2\28:\b\6\1\29\62\3\2")
+        buf.write("\2\29\67\3\2\2\2:\13\3\2\2\2;<\7\22\2\2<=\7\7\2\2=>\7")
+        buf.write("\22\2\2>?\5\26\f\2?@\5\f\7\2@A\b\7\1\2AG\3\2\2\2BC\7\22")
+        buf.write("\2\2CD\7\7\2\2DE\7\22\2\2EG\b\7\1\2F;\3\2\2\2FB\3\2\2")
+        buf.write("\2G\r\3\2\2\2HI\7\23\2\2IJ\7\17\2\2JK\7\23\2\2KL\7\20")
+        buf.write("\2\2LM\5\f\7\2MN\5\20\t\2NO\b\b\1\2O\17\3\2\2\2PQ\7\17")
+        buf.write("\2\2QR\7\23\2\2RS\7\20\2\2ST\5\f\7\2TU\5\20\t\2UV\b\t")
+        buf.write("\1\2VY\3\2\2\2WY\b\t\1\2XP\3\2\2\2XW\3\2\2\2Y\21\3\2\2")
+        buf.write("\2Z[\7\23\2\2[\\\7\b\2\2\\]\5\22\n\2]^\b\n\1\2^j\3\2\2")
+        buf.write("\2_`\5\16\b\2`a\b\n\1\2aj\3\2\2\2bc\5\16\b\2cd\7\b\2\2")
+        buf.write("de\5\22\n\2ef\b\n\1\2fj\3\2\2\2gh\7\23\2\2hj\b\n\1\2i")
+        buf.write("Z\3\2\2\2i_\3\2\2\2ib\3\2\2\2ig\3\2\2\2j\23\3\2\2\2kl")
+        buf.write("\7\22\2\2lm\5\4\3\2mn\7\22\2\2no\b\13\1\2ov\3\2\2\2pq")
+        buf.write("\7\22\2\2qr\5\4\3\2rs\7\21\2\2st\b\13\1\2tv\3\2\2\2uk")
+        buf.write("\3\2\2\2up\3\2\2\2v\25\3\2\2\2wx\t\3\2\2x\27\3\2\2\2\t")
+        buf.write(")\609FXiu")
         return buf.getvalue()
 
 
@@ -147,12 +148,6 @@ class SQLParser ( Parser ):
             if hasattr( listener, "exitSql_expr" ):
                 listener.exitSql_expr(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitSql_expr" ):
-                return visitor.visitSql_expr(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
@@ -172,7 +167,7 @@ class SQLParser ( Parser ):
             self.state = 24
             self.match(SQLParser.FROM)
             self.state = 25
-            localctx.fr = self.clausulaFrom()
+            localctx.fr = self.clausulaFrom( [] )
             self.state = 26
             localctx.w = self.where()
             number = localctx.w.number
@@ -184,6 +179,21 @@ class SQLParser ( Parser ):
             node.set_child(selection)
             node = node.children
             node.set_child(theta_join)
+            print(localctx.sl.columns)
+
+            selectingTables = [x.split('.')[0] for x in localctx.sl.columns]
+            print(selectingTables)
+            whereTables = [x[0].split('.')[0] for x in localctx.w.terms]
+            print(localctx.fr.tables)
+            print(whereTables)
+
+            for t in selectingTables:
+                if(not t in localctx.fr.tables):
+                    print("Selecting unknow table " + t)
+
+            for t in whereTables:
+                if(not t in localctx.fr.tables):
+                    print("Unknown table " + t + " being used in where clause")
 
             self._ctx.stop = self._input.LT(-1)
 
@@ -214,12 +224,6 @@ class SQLParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitComparisonOp" ):
                 listener.exitComparisonOp(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitComparisonOp" ):
-                return visitor.visitComparisonOp(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -279,12 +283,6 @@ class SQLParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitConditionsWhere" ):
                 listener.exitConditionsWhere(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitConditionsWhere" ):
-                return visitor.visitConditionsWhere(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -360,12 +358,6 @@ class SQLParser ( Parser ):
             if hasattr( listener, "exitWhere" ):
                 listener.exitWhere(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitWhere" ):
-                return visitor.visitWhere(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
@@ -427,12 +419,6 @@ class SQLParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitClausulaSelect" ):
                 listener.exitClausulaSelect(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitClausulaSelect" ):
-                return visitor.visitClausulaSelect(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -510,12 +496,6 @@ class SQLParser ( Parser ):
             if hasattr( listener, "exitConditionsJoin" ):
                 listener.exitConditionsJoin(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitConditionsJoin" ):
-                return visitor.visitConditionsJoin(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
@@ -568,14 +548,17 @@ class SQLParser ( Parser ):
 
     class JoinsContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1, tablesSoFar=None):
             super().__init__(parent, invokingState)
             self.parser = parser
+            self.tablesSoFar = None
             self.tj = None
+            self.tables = None
             self.t1 = None # Token
             self.t2 = None # Token
             self.c = None # ConditionsJoinContext
             self.j = None # Joins_Context
+            self.tablesSoFar = tablesSoFar
 
         def JOIN(self):
             return self.getToken(SQLParser.JOIN, 0)
@@ -608,18 +591,12 @@ class SQLParser ( Parser ):
             if hasattr( listener, "exitJoins" ):
                 listener.exitJoins(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitJoins" ):
-                return visitor.visitJoins(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
+    def joins(self, tablesSoFar):
 
-    def joins(self):
-
-        localctx = SQLParser.JoinsContext(self, self._ctx, self.state)
+        localctx = SQLParser.JoinsContext(self, self._ctx, self.state, tablesSoFar)
         self.enterRule(localctx, 12, self.RULE_joins)
         try:
             self.enterOuterAlt(localctx, 1)
@@ -634,12 +611,22 @@ class SQLParser ( Parser ):
             self.state = 74
             localctx.c = self.conditionsJoin()
             self.state = 75
-            localctx.j = self.joins_()
+            localctx.j = self.joins_(localctx.tablesSoFar + [(None if localctx.t1 is None else localctx.t1.text)] + [(None if localctx.t2 is None else localctx.t2.text)])
             join1 = ThetaJoinNode(Table((None if localctx.t1 is None else localctx.t1.text)), Table((None if localctx.t2 is None else localctx.t2.text)), localctx.c.terms, localctx.c.conectors)
-            if (localctx.j.table == None):
+            localctx.tables = [(None if localctx.t1 is None else localctx.t1.text), (None if localctx.t2 is None else localctx.t2.text)]
+            if (localctx.j.table == []):
                 localctx.tj = join1
             else:
                 localctx.tj = ThetaJoinNode(join1, localctx.j.table, localctx.j.terms, localctx.j.conectors)
+                localctx.tables += localctx.j.table
+
+            for t in localctx.c.terms:
+                temp = t.replace(' ', '').split('=')
+                if(not temp[0].split('.')[0] in (localctx.tablesSoFar + [(None if localctx.t1 is None else localctx.t1.text)] + [(None if localctx.t2 is None else localctx.t2.text)])):
+                    print("Unknown table " + temp[0].split('.')[0] + " referenced in JOIN condition")
+                if(not temp[1].split('.')[0] in (localctx.tablesSoFar + [(None if localctx.t1 is None else localctx.t1.text)] + [(None if localctx.t2 is None else localctx.t2.text)])):
+                    print("Unknown table " + temp[1].split('.')[0] + " referenced in JOIN condition")
+
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -650,14 +637,17 @@ class SQLParser ( Parser ):
 
     class Joins_Context(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1, tablesSoFar=None):
             super().__init__(parent, invokingState)
             self.parser = parser
+            self.tablesSoFar = None
             self.table = None
             self.terms = None
             self.conectors = None
             self.t = None # Token
             self.c = None # ConditionsJoinContext
+            self.j = None # Joins_Context
+            self.tablesSoFar = tablesSoFar
 
         def JOIN(self):
             return self.getToken(SQLParser.JOIN, 0)
@@ -672,6 +662,10 @@ class SQLParser ( Parser ):
             return self.getTypedRuleContext(SQLParser.ConditionsJoinContext,0)
 
 
+        def joins_(self):
+            return self.getTypedRuleContext(SQLParser.Joins_Context,0)
+
+
         def getRuleIndex(self):
             return SQLParser.RULE_joins_
 
@@ -683,21 +677,15 @@ class SQLParser ( Parser ):
             if hasattr( listener, "exitJoins_" ):
                 listener.exitJoins_(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitJoins_" ):
-                return visitor.visitJoins_(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
+    def joins_(self, tablesSoFar):
 
-    def joins_(self):
-
-        localctx = SQLParser.Joins_Context(self, self._ctx, self.state)
+        localctx = SQLParser.Joins_Context(self, self._ctx, self.state, tablesSoFar)
         self.enterRule(localctx, 14, self.RULE_joins_)
         try:
-            self.state = 85
+            self.state = 86
             token = self._input.LA(1)
             if token in [SQLParser.JOIN]:
                 self.enterOuterAlt(localctx, 1)
@@ -709,12 +697,20 @@ class SQLParser ( Parser ):
                 self.match(SQLParser.ON)
                 self.state = 81
                 localctx.c = self.conditionsJoin()
+                self.state = 82
+                localctx.j = self.joins_(localctx.tablesSoFar + [(None if localctx.t is None else localctx.t.text)])
                 localctx.table = (None if localctx.t is None else localctx.t.text)
-                localctx.terms = localctx.c.terms, localctx.conectors = localctx.c.conectors
+                localctx.terms = localctx.c.terms
+                localctx.conectors = localctx.c.conectors
+                localctx.table = [(None if localctx.t is None else localctx.t.text)] + localctx.j.table
+                for t in localctx.c.terms:
+                    temp = t.replace(' ', '').split('=')
+                    if(not temp[0].split('.')[0] in (localctx.tablesSoFar + [(None if localctx.t is None else localctx.t.text)])):
+                        print("Unknown table " + temp[0].split('.')[0] + " referenced in JOIN condition")
 
             elif token in [SQLParser.EOF, SQLParser.T__5, SQLParser.WHERE]:
                 self.enterOuterAlt(localctx, 2)
-                localctx.table = None
+                localctx.table = []
                 localctx.terms = None
                 localctx.conectors = None
 
@@ -731,13 +727,17 @@ class SQLParser ( Parser ):
 
     class ClausulaFromContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1, tablesSoFar=None):
             super().__init__(parent, invokingState)
             self.parser = parser
+            self.tablesSoFar = None
             self.tj = None
+            self.tables = None
             self.t1 = None # Token
             self.c = None # ClausulaFromContext
             self.j = None # JoinsContext
+            self.t = None # Token
+            self.tablesSoFar = tablesSoFar
 
         def TABELA(self):
             return self.getToken(SQLParser.TABELA, 0)
@@ -761,60 +761,59 @@ class SQLParser ( Parser ):
             if hasattr( listener, "exitClausulaFrom" ):
                 listener.exitClausulaFrom(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitClausulaFrom" ):
-                return visitor.visitClausulaFrom(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
+    def clausulaFrom(self, tablesSoFar):
 
-    def clausulaFrom(self):
-
-        localctx = SQLParser.ClausulaFromContext(self, self._ctx, self.state)
+        localctx = SQLParser.ClausulaFromContext(self, self._ctx, self.state, tablesSoFar)
         self.enterRule(localctx, 16, self.RULE_clausulaFrom)
         try:
-            self.state = 102
+            self.state = 103
             self._errHandler.sync(self);
             la_ = self._interp.adaptivePredict(self._input,5,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 87
-                localctx.t1 = self.match(SQLParser.TABELA)
                 self.state = 88
-                self.match(SQLParser.T__5)
+                localctx.t1 = self.match(SQLParser.TABELA)
                 self.state = 89
-                localctx.c = self.clausulaFrom()
+                self.match(SQLParser.T__5)
+                self.state = 90
+                localctx.c = self.clausulaFrom(localctx.tablesSoFar + [(None if localctx.t1 is None else localctx.t1.text)])
                 tab = Table((None if localctx.t1 is None else localctx.t1.text))
                 join = ThetaJoinNode(tab, localctx.c.tj, [','], [])
                 localctx.tj = join
+                localctx.tables = [(None if localctx.t1 is None else localctx.t1.text)] + localctx.c.tables
+                print("---> " + str(localctx.tablesSoFar))
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 92
-                localctx.j = self.joins()
+                self.state = 93
+                localctx.j = self.joins(localctx.tablesSoFar)
                 localctx.tj = localctx.j.tj
+                localctx.tables = localctx.j.tables
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 95
-                localctx.j = self.joins()
                 self.state = 96
-                self.match(SQLParser.T__5)
+                localctx.j = self.joins(localctx.tablesSoFar)
                 self.state = 97
-                localctx.c = self.clausulaFrom()
+                self.match(SQLParser.T__5)
+                self.state = 98
+                localctx.c = self.clausulaFrom(localctx.j.tables + localctx.tablesSoFar )
                 localctx.tj = ThetaJoinNode(localctx.j.tj, localctx.c.tj, [','], [])
+                localctx.tables = localctx.j.tables + localctx.c.tables
                 pass
 
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 100
-                self.match(SQLParser.TABELA)
+                self.state = 101
+                localctx.t = self.match(SQLParser.TABELA)
                 table = Table(self._input.getText((localctx.start, self._input.LT(-1))))
                 localctx.tj = table
+                localctx.tables = [(None if localctx.t is None else localctx.t.text)]
                 pass
 
 
@@ -862,12 +861,6 @@ class SQLParser ( Parser ):
             if hasattr( listener, "exitTermo" ):
                 listener.exitTermo(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitTermo" ):
-                return visitor.visitTermo(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
@@ -876,27 +869,27 @@ class SQLParser ( Parser ):
         localctx = SQLParser.TermoContext(self, self._ctx, self.state)
         self.enterRule(localctx, 18, self.RULE_termo)
         try:
-            self.state = 114
+            self.state = 115
             self._errHandler.sync(self);
             la_ = self._interp.adaptivePredict(self._input,6,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 104
-                localctx.t1 = self.match(SQLParser.COLUNA)
                 self.state = 105
-                localctx.o = self.comparisonOp()
+                localctx.t1 = self.match(SQLParser.COLUNA)
                 self.state = 106
+                localctx.o = self.comparisonOp()
+                self.state = 107
                 localctx.t2 = self.match(SQLParser.COLUNA)
                 localctx.term = ((None if localctx.t1 is None else localctx.t1.text),(None if localctx.o is None else self._input.getText((localctx.o.start,localctx.o.stop))),(None if localctx.t2 is None else localctx.t2.text))
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 109
-                localctx.t = self.match(SQLParser.COLUNA)
                 self.state = 110
-                localctx.o = self.comparisonOp()
+                localctx.t = self.match(SQLParser.COLUNA)
                 self.state = 111
+                localctx.o = self.comparisonOp()
+                self.state = 112
                 localctx.a = self.match(SQLParser.ATRIBUTO)
                 localctx.term = ((None if localctx.t is None else localctx.t.text),(None if localctx.o is None else self._input.getText((localctx.o.start,localctx.o.stop))),(None if localctx.a is None else localctx.a.text))
                 pass
@@ -928,12 +921,6 @@ class SQLParser ( Parser ):
             if hasattr( listener, "exitConector" ):
                 listener.exitConector(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitConector" ):
-                return visitor.visitConector(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
@@ -944,7 +931,7 @@ class SQLParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 116
+            self.state = 117
             _la = self._input.LA(1)
             if not(_la==SQLParser.T__6 or _la==SQLParser.T__7):
                 self._errHandler.recoverInline(self)

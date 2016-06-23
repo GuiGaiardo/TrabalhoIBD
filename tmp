@@ -1,3 +1,3 @@
-select funcionario.nomeFunc, projetos.nomeProj
+select funciosnario.nomeFunc, projaetos.nomeProj
 FROM funcionario, projetos JOIN coisas ON projetos.eta = coisas.fi
-WHERE coisas.xis = 'ao' and funcionario.cachuera < 1000 and funcionario.salario > 4000 and projetos.duracao = 10 and projetos.duracao = 11 or funcionario.depto = 100
+WHERE coisas.xis = 'ao' and funcaionario.cachuera < 1000 and funcidonario.salario > 4000 and projetos.duracao = 10 and projetos.duracao = 11 or funcionario.depto = 100
