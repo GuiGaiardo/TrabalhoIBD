@@ -94,15 +94,17 @@ class ThetaJoinNode():
 
         if (self.terms[0] == ','):
             text += " X"
+
+        elif (len(self.terms) == 1):
+            text += " |X|"
+            text += " " + self.terms[0][0] + self.terms[0][1] + self.terms[0][2]
+
         else:
             text += " |X|"
-            if (len(self.terms) == 1):
-                text += " " + self.terms[0]
-            else:
-               for i in range(len(self.terms)-1):
-                   text += " " + self.terms[i] + " " + self.conectors[i]
+            for i in range(len(self.conectors)):
+                text += " " + self.terms[i][0] + self.terms[i][1] + self.terms[i][2] + " " + self.conectors[i]
 
-               text += " " + self.terms[i+1]
+            text += " " + self.terms[i+1][0] + self.terms[i+1][1] + self.terms[i+1][2]
 
         text += " (" + str(self.children[1]) + ")"
 
@@ -110,21 +112,23 @@ class ThetaJoinNode():
 
 
     def get_description(self):
-        description = ""
+        text = ""
 
-        if (len(self.terms) == 1):
-            if (self.terms[0] == ','):
-                description += "X"
-            else:
-                description += self.terms[0]
+        if (self.terms[0] == ','):
+            text += " X"
+
+        elif (len(self.terms) == 1):
+            text += " |X|"
+            text += " " + self.terms[0][0] + self.terms[0][1] + self.terms[0][2]
 
         else:
+            text += " |X|"
             for i in range(len(self.conectors)):
-                description += " " + self.terms[i] + " " + self.conectors[i]
+                text += " " + self.terms[i][0] + self.terms[i][1] + self.terms[i][2] + " " + self.conectors[i]
 
-            description += " " + self.terms[i+1]
+            text += " " + self.terms[i + 1][0] + self.terms[i + 1][1] + self.terms[i + 1][2]
 
-        return description
+        return text
 
 
 class Table():

@@ -67,10 +67,10 @@ clausulaSelect returns[columns] : c=COLUNA ',' c1=clausulaSelect {$columns = $c1
 $columns.append($c.text)}| COLUNA {$columns = [$text]};
 
 conditionsJoin returns[terms, conectors] : c1=COLUNA '=' c2=COLUNA c=conector cnd=conditionsJoin {$terms = $cnd.terms
-$terms.append($c1.text + "=" + $c2.text)
+$terms.append(($c1.text,"=",$c2.text))
 $conectors = $cnd.conectors
 $conectors.append($c.text)}
-| COLUNA '=' COLUNA {$terms = [$text]
+| c1=COLUNA '=' c2=COLUNA {$terms = [($c1.text, "=", $c2.text)]
 $conectors = []};
 
 joins[tablesSoFar] returns[tj, tables] : t1=TABELA JOIN t2=TABELA ON c=conditionsJoin j=joins_[$tablesSoFar + [$t1.text] + [$t2.text]] {join1 = ThetaJoinNode(Table($t1.text), Table($t2.text), $c.terms, $c.conectors)
@@ -81,22 +81,23 @@ else:
     $tj = ThetaJoinNode(join1, $j.table, $j.terms, $j.conectors)
     $tables += $j.table
 
-for t in $c.terms:
-    temp = t.replace(' ', '').split('=')
-    if(not temp[0].split('.')[0] in ($tablesSoFar + [$t1.text] + [$t2.text])):
-        print("Unknown table " + temp[0].split('.')[0] + " referenced in JOIN condition")
-    if(not temp[1].split('.')[0] in ($tablesSoFar + [$t1.text] + [$t2.text])):
-        print("Unknown table " + temp[1].split('.')[0] + " referenced in JOIN condition")
+for term in $c.terms:
+    table1 = term[0].split('.')[0]
+    table2 = term[2].split('.')[0]
+    if table1 not in ($tablesSoFar + [$t1.text] + [$t2.text]):
+        print("Unknown table " + table1 + " referenced in JOIN condition")
+    if table2 not in ($tablesSoFar + [$t1.text] + [$t2.text]):
+        print("Unknown table " + table2 + " referenced in JOIN condition")
 };
 
 joins_ [tablesSoFar] returns[table, terms, conectors]  : JOIN t=TABELA ON c=conditionsJoin j=joins_[$tablesSoFar + [$t.text]] {$table = $t.text
 $terms = $c.terms
 $conectors = $c.conectors
 $table = [$t.text] + $j.table
-for t in $c.terms:
-    temp = t.replace(' ', '').split('=')
-    if(not temp[0].split('.')[0] in ($tablesSoFar + [$t.text])):
-        print("Unknown table " + temp[0].split('.')[0] + " referenced in JOIN condition")}
+for term in $c.terms:
+    table1 = term[0].split('.')[0]
+    if table1 not in ($tablesSoFar + [$t.text]):
+        print("Unknown table " + table1 + " referenced in JOIN condition")}
 | {$table = []
 $terms = None
 $conectors = None};
@@ -130,7 +131,7 @@ WHERE  : W H E R E;
 JOIN   : J O I N;
 ON     : O N;
 
-ATRIBUTO : '\'' ('a'..'z' |'A'..'Z' )+ '\'' | ('0' .. '9')+ ('.' ('0' .. '9')+ | );
+ATRIBUTO : ('\'' | '\"') ('a'..'z' |'A'..'Z' | ' ')+ ('\'' | '\"') | ('0' .. '9')+ ('.' ('0' .. '9')+ | );
 COLUNA : ('a'..'z' |'A'..'Z' )('a'..'z' |'A'..'Z' | '0' .. '9')*'.'('a'..'z' |'A'..'Z' )('a'..'z' |'A'..'Z' | '0' .. '9')*;
 TABELA : ('a'..'z' |'A'..'Z' )('a'..'z' |'A'..'Z' | '0' .. '9')*;
 

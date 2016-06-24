@@ -520,7 +520,7 @@ class SQLParser ( Parser ):
                 self.state = 61
                 localctx.cnd = self.conditionsJoin()
                 localctx.terms = localctx.cnd.terms
-                localctx.terms.append((None if localctx.c1 is None else localctx.c1.text) + "=" + (None if localctx.c2 is None else localctx.c2.text))
+                localctx.terms.append(((None if localctx.c1 is None else localctx.c1.text),"=",(None if localctx.c2 is None else localctx.c2.text)))
                 localctx.conectors = localctx.cnd.conectors
                 localctx.conectors.append((None if localctx.c is None else self._input.getText((localctx.c.start,localctx.c.stop))))
                 pass
@@ -528,12 +528,12 @@ class SQLParser ( Parser ):
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 64
-                self.match(SQLParser.COLUNA)
+                localctx.c1 = self.match(SQLParser.COLUNA)
                 self.state = 65
                 self.match(SQLParser.T__4)
                 self.state = 66
-                self.match(SQLParser.COLUNA)
-                localctx.terms = [self._input.getText((localctx.start, self._input.LT(-1)))]
+                localctx.c2 = self.match(SQLParser.COLUNA)
+                localctx.terms = [((None if localctx.c1 is None else localctx.c1.text), "=", (None if localctx.c2 is None else localctx.c2.text))]
                 localctx.conectors = []
                 pass
 
@@ -620,12 +620,13 @@ class SQLParser ( Parser ):
                 localctx.tj = ThetaJoinNode(join1, localctx.j.table, localctx.j.terms, localctx.j.conectors)
                 localctx.tables += localctx.j.table
 
-            for t in localctx.c.terms:
-                temp = t.replace(' ', '').split('=')
-                if(not temp[0].split('.')[0] in (localctx.tablesSoFar + [(None if localctx.t1 is None else localctx.t1.text)] + [(None if localctx.t2 is None else localctx.t2.text)])):
-                    print("Unknown table " + temp[0].split('.')[0] + " referenced in JOIN condition")
-                if(not temp[1].split('.')[0] in (localctx.tablesSoFar + [(None if localctx.t1 is None else localctx.t1.text)] + [(None if localctx.t2 is None else localctx.t2.text)])):
-                    print("Unknown table " + temp[1].split('.')[0] + " referenced in JOIN condition")
+            for term in localctx.c.terms:
+                table1 = term[0].split('.')[0]
+                table2 = term[2].split('.')[0]
+                if table1 not in (localctx.tablesSoFar + [(None if localctx.t1 is None else localctx.t1.text)] + [(None if localctx.t2 is None else localctx.t2.text)]):
+                    print("Unknown table " + table1 + " referenced in JOIN condition")
+                if table2 not in (localctx.tablesSoFar + [(None if localctx.t1 is None else localctx.t1.text)] + [(None if localctx.t2 is None else localctx.t2.text)]):
+                    print("Unknown table " + table2 + " referenced in JOIN condition")
 
         except RecognitionException as re:
             localctx.exception = re
@@ -703,10 +704,10 @@ class SQLParser ( Parser ):
                 localctx.terms = localctx.c.terms
                 localctx.conectors = localctx.c.conectors
                 localctx.table = [(None if localctx.t is None else localctx.t.text)] + localctx.j.table
-                for t in localctx.c.terms:
-                    temp = t.replace(' ', '').split('=')
-                    if(not temp[0].split('.')[0] in (localctx.tablesSoFar + [(None if localctx.t is None else localctx.t.text)])):
-                        print("Unknown table " + temp[0].split('.')[0] + " referenced in JOIN condition")
+                for term in localctx.c.terms:
+                    table1 = term[0].split('.')[0]
+                    if table1 not in (localctx.tablesSoFar + [(None if localctx.t is None else localctx.t.text)]):
+                        print("Unknown table " + table1 + " referenced in JOIN condition")
 
             elif token in [SQLParser.EOF, SQLParser.T__5, SQLParser.WHERE]:
                 self.enterOuterAlt(localctx, 2)

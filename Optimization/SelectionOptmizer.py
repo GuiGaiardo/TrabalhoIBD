@@ -1,51 +1,31 @@
 from SQL_Parser.QueryTree import *
+
+
 class SelectionOptimizer:
     def __init__(self, tree):
         self.root = tree.root
 
     def optimize(self):
         selection = self.root.children
-        if type(selection.children) == Table:
+        if type(selection.children) == Table or 'or' in selection.conectors:
             return self.root
 
         terms = selection.terms
-        terms.reverse()
-        conectors = selection.conectors
-        conectors.reverse()
-
-        if 'or' in conectors:
-            left_over_terms = terms[conectors.index('or'):]
-            terms = terms[:conectors.index('or')]
-            left_over_conectors = conectors[conectors.index('or'):]
-            conectors = conectors[:conectors.index('or')]
-
-            if len(terms) == 0:
-                return self.root
-        else:
-            left_over_terms = []
-            left_over_conectors = []
 
         unaries, binaries = self.__separate_terms(terms)
         son = selection.children
         tables, unaries, binaries = self._optimize(son, unaries, binaries)
 
-        for term in binaries:
-            left_over_terms.append(term)
 
-        if len(left_over_terms) == 0:
-            self.root.children = son
+        if len(binaries) > 0:
+            selection.terms = binaries
+            n_conectors = len(selection.terms) - 1
+            selection.conectors = ["and" for i in range(n_conectors)]
 
         else:
-            selection.terms = left_over_terms
-            n_conectors = len(selection.terms) - len(left_over_conectors) - 1
-            selection.conectors = ["and" for i in range(n_conectors)] + left_over_conectors
+            self.root.children = son
 
         return self.root
-
-
-
-#lidar com os unarios, achar posicao (acima da tabela)
-#lidar com os binarios, achar posicao (acima da juncao)
 
     def _optimize(self, node, unaries, binaries):
         left = node.children[0]
@@ -54,15 +34,9 @@ class SelectionOptimizer:
             left_table = left.get_description()
             tables = [left_table]
             terms = []
-            print('AQUI')
-            print(unaries)
             for term in unaries:
                 if term[0] == left_table:
                     terms.append(term[1])
-            print(terms)
-
-
-
 
             if len(terms) > 0:
                 new_selection = SelectionNode(terms, ['and' for i in range(len(terms)-1)])
@@ -70,7 +44,7 @@ class SelectionOptimizer:
                 node.children[0] = new_selection
 
         elif isinstance(left, ThetaJoinNode):
-            tables, unaries, binaries = self._optmize(left, unaries, binaries)
+            tables, unaries, binaries = self._optimize(left, unaries, binaries)
 
             terms = []
             for term in binaries:
@@ -84,9 +58,9 @@ class SelectionOptimizer:
                 new_selection.set_child(left)
                 node.children[0] = new_selection
 
-
         else:
             print("deu merda")
+
         if isinstance(right, Table):
             right_table = right.get_description()
             tables.append(right_table)
@@ -119,14 +93,9 @@ class SelectionOptimizer:
         else:
             print("DEU RUIM!")
 
-
         return tables, unaries, binaries
 
-
-
-
-
-    #Separa os termos que utilizam apenas uma tabela dos que utilizam duas tabelas distintas
+    # Separa os termos que utilizam apenas uma tabela dos que utilizam duas tabelas distintas
     def __separate_terms(self, terms):
         unaries = []
         binaries = []
@@ -136,11 +105,7 @@ class SelectionOptimizer:
                 unaries.append((tables[0], term))
             else:
                 binaries.append((tables, term))
-
-
         return unaries, binaries
-
-
 
     def __get_tables(self, term):
         table1 = term[0]

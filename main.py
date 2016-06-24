@@ -42,6 +42,9 @@ class Root(FloatLayout):
 
     def parse_query(self):
         tree = SQLMain.main(self.text_input.text)
+        s = SelectionOptimizer(tree)
+        tree.root = s.optimize()
+        print(str(tree.root))
 
         # if(tree and tree.root):
            # print(str(tree.root))
