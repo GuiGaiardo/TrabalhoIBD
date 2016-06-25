@@ -1,18 +1,16 @@
 import kivy
-kivy.require('1.9.1')
-
 from kivy.app import App
 from kivy.uix.floatlayout import FloatLayout
 from kivy.factory import Factory
 from kivy.properties import ObjectProperty
 from kivy.uix.popup import Popup
+import os
+
 from TreePrinter import TreePrinter
 from SQL_Parser import SQLMain
-
 from Optimization.SelectionOptmizer import *
 
-
-import os
+kivy.require('1.9.1')
 
 
 class LoadDialog(FloatLayout):
@@ -42,49 +40,29 @@ class Root(FloatLayout):
 
     def parse_query(self):
         tree = SQLMain.main(self.text_input.text)
-        s = SelectionOptimizer(tree)
-        tree.root = s.optimize()
-        print(str(tree.root))
-
-        # if(tree and tree.root):
-           # print(str(tree.root))
-           #  s = SelectionOptimizer(tree)
-           #  tree.root = s.optimize()
-           #  print(str(tree.root))
-           #
-            # printer = TreePrinter.TreePrinter(query_tree=tree, close=self.dismiss_popup)
-            # printer.draw_tree()
-            # self._popup = Popup(title="Query Tree", content=printer)
-            # self._popup.open()
-
-        #faz as analises
-        # try:
-        #     #query_tree = QueryChecker(self.text_input.text)
-        #     self.is_valid = True
-        # except QueryLexicalError:
-        #     self.is_valid = False
-        #     #msg de erro lexico
-        # except QuerySyntaxError:
-        #     self.is_valid = False
-
+        if not tree.root:
+            self.tree = None
+            self.is_valid = False
+        else:
+            self.is_valid = True
+            self.tree = tree
+            print(str(tree.root))
 
     def show_tree(self):
         if self.is_valid:
             pass
             # printer = TreePrinter(query_tree)
 
-
     def show_optimized_tree(self):
         if self.is_valid:
-            pass
-            #optimize and show
-
-
+            optimized_tree = self.tree
+            s = SelectionOptimizer(optimized_tree)
+            optimized_tree.root = s.optimize()
+            print(str(optimized_tree.root))
 
 
 class QueryTree(App):
     pass
-
 
 
 Factory.register('Root', cls=Root)

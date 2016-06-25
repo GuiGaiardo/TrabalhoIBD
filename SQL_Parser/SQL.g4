@@ -14,57 +14,57 @@ sql_expr locals []
 @init{
 number = 0
 }
-@after{
-print("Found "+ str(number) + " conditions on where")
-}: SELECT sl=clausulaSelect FROM  fr=clausulaFrom[ [] ] w=where {number = $w.number
-projection = ProjectionNode($sl.columns)
-selection = SelectionNode($w.terms, $w.conectors)
+: SELECT sl=clausulaSelect FROM  fr=clausulaFrom[ [] ] w=where {projection = ProjectionNode($sl.columns)
 theta_join = $fr.tj
-query_tree.set_root(projection)
-node = query_tree.root
-node.set_child(selection)
-node = node.children
-node.set_child(theta_join)
-print($sl.columns)
 
 selectingTables = [x.split('.')[0] for x in $sl.columns]
-print(selectingTables)
 whereTables = [x[0].split('.')[0] for x in $w.terms]
-print($fr.tables)
-print(whereTables)
+valid_query = 1
 
 for t in selectingTables:
     if(not t in $fr.tables):
         print("Selecting unknow table " + t)
+        valid_query = 0
+        projection = None
 
 for t in whereTables:
     if(not t in $fr.tables):
         print("Unknown table " + t + " being used in where clause")
-}
-        ;
+        valid_query = 0
+        projection = None
+
+if valid_query:
+    if len($w.terms) > 0:
+        selection = SelectionNode($w.terms, $w.conectors)
+        selection.set_child(theta_join)
+        projection.set_child(selection)
+
+    else:
+        projection.set_child(theta_join)
+
+query_tree.set_root(projection)};
 
 
 comparisonOp: '>='|'<='| '>'| '<' | '=';
 
-conditionsWhere returns[number, terms, conectors]
-: t=termo c=conector cnd=conditionsWhere {$number = $cnd.number + 1
-$terms = $cnd.terms
+conditionsWhere returns[terms, conectors]
+: t=termo c=conector cnd=conditionsWhere {$terms = $cnd.terms
 $terms.append($t.term)
 $conectors = $cnd.conectors
 $conectors.append($c.text)}
-| t=termo {$number = 1
-print(str($t.term))
-$terms = [$t.term]
+| t=termo {$terms = [$t.term]
 $conectors = []} ;
 
-where returns[number, terms, conectors]
-: WHERE c=conditionsWhere {$number = $conditionsWhere.number
-$terms = $c.terms
+where returns[terms, conectors]
+: WHERE c=conditionsWhere {$terms = $c.terms
 $conectors = $c.conectors}
-   | {$number = 0};
+   | {$terms = []
+$conectors = []};
 
 clausulaSelect returns[columns] : c=COLUNA ',' c1=clausulaSelect {$columns = $c1.columns
-$columns.append($c.text)}| COLUNA {$columns = [$text]};
+$columns.append($c.text)}
+| COLUNA {$columns = [$text]}
+;
 
 conditionsJoin returns[terms, conectors] : c1=COLUNA '=' c2=COLUNA c=conector cnd=conditionsJoin {$terms = $cnd.terms
 $terms.append(($c1.text,"=",$c2.text))
@@ -105,8 +105,7 @@ $conectors = None};
 clausulaFrom[tablesSoFar] returns[tj, tables] : t1=TABELA ',' c=clausulaFrom[$tablesSoFar + [$t1.text]]{tab = Table($t1.text)
 join = ThetaJoinNode(tab, $c.tj, [','], [])
 $tj = join
-$tables = [$t1.text] + $c.tables
-print("---> " + str($tablesSoFar))}
+$tables = [$t1.text] + $c.tables}
 | j=joins[$tablesSoFar] {$tj = $j.tj
 $tables = $j.tables}
 | j=joins[$tablesSoFar] ',' c=clausulaFrom[$j.tables + $tablesSoFar ] {$tj = ThetaJoinNode($j.tj, $c.tj, [','], [])

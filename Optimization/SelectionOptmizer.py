@@ -6,8 +6,11 @@ class SelectionOptimizer:
         self.root = tree.root
 
     def optimize(self):
+        if isinstance(self.root.children, ThetaJoinNode):
+            return self.root
+
         selection = self.root.children
-        if type(selection.children) == Table or 'or' in selection.conectors:
+        if 'or' in selection.conectors or isinstance(selection.children, Table):
             return self.root
 
         terms = selection.terms
@@ -15,7 +18,6 @@ class SelectionOptimizer:
         unaries, binaries = self.__separate_terms(terms)
         son = selection.children
         tables, unaries, binaries = self._optimize(son, unaries, binaries)
-
 
         if len(binaries) > 0:
             selection.terms = binaries

@@ -170,35 +170,35 @@ class SQLParser ( Parser ):
             localctx.fr = self.clausulaFrom( [] )
             self.state = 26
             localctx.w = self.where()
-            number = localctx.w.number
             projection = ProjectionNode(localctx.sl.columns)
-            selection = SelectionNode(localctx.w.terms, localctx.w.conectors)
             theta_join = localctx.fr.tj
-            query_tree.set_root(projection)
-            node = query_tree.root
-            node.set_child(selection)
-            node = node.children
-            node.set_child(theta_join)
-            print(localctx.sl.columns)
 
             selectingTables = [x.split('.')[0] for x in localctx.sl.columns]
-            print(selectingTables)
             whereTables = [x[0].split('.')[0] for x in localctx.w.terms]
-            print(localctx.fr.tables)
-            print(whereTables)
+            valid_query = 1
 
             for t in selectingTables:
                 if(not t in localctx.fr.tables):
                     print("Selecting unknow table " + t)
+                    valid_query = 0
+                    projection = None
 
             for t in whereTables:
                 if(not t in localctx.fr.tables):
                     print("Unknown table " + t + " being used in where clause")
+                    valid_query = 0
+                    projection = None
 
-            self._ctx.stop = self._input.LT(-1)
+            if valid_query:
+                if len(localctx.w.terms) > 0:
+                    selection = SelectionNode(localctx.w.terms, localctx.w.conectors)
+                    selection.set_child(theta_join)
+                    projection.set_child(selection)
 
-            print("Found "+ str(number) + " conditions on where")
+                else:
+                    projection.set_child(theta_join)
 
+            query_tree.set_root(projection)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -254,7 +254,6 @@ class SQLParser ( Parser ):
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
-            self.number = None
             self.terms = None
             self.conectors = None
             self.t = None # TermoContext
@@ -303,7 +302,6 @@ class SQLParser ( Parser ):
                 localctx.c = self.conector()
                 self.state = 33
                 localctx.cnd = self.conditionsWhere()
-                localctx.number = localctx.cnd.number + 1
                 localctx.terms = localctx.cnd.terms
                 localctx.terms.append(localctx.t.term)
                 localctx.conectors = localctx.cnd.conectors
@@ -314,8 +312,6 @@ class SQLParser ( Parser ):
                 self.enterOuterAlt(localctx, 2)
                 self.state = 36
                 localctx.t = self.termo()
-                localctx.number = 1
-                print(str(localctx.t.term))
                 localctx.terms = [localctx.t.term]
                 localctx.conectors = []
                 pass
@@ -334,11 +330,9 @@ class SQLParser ( Parser ):
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
-            self.number = None
             self.terms = None
             self.conectors = None
             self.c = None # ConditionsWhereContext
-            self._conditionsWhere = None # ConditionsWhereContext
 
         def WHERE(self):
             return self.getToken(SQLParser.WHERE, 0)
@@ -373,14 +367,14 @@ class SQLParser ( Parser ):
                 self.state = 41
                 self.match(SQLParser.WHERE)
                 self.state = 42
-                localctx.c = localctx._conditionsWhere = self.conditionsWhere()
-                localctx.number = localctx._conditionsWhere.number
+                localctx.c = self.conditionsWhere()
                 localctx.terms = localctx.c.terms
                 localctx.conectors = localctx.c.conectors
 
             elif token in [SQLParser.EOF]:
                 self.enterOuterAlt(localctx, 2)
-                localctx.number = 0
+                localctx.terms = []
+                localctx.conectors = []
 
             else:
                 raise NoViableAltException(self)
@@ -785,7 +779,6 @@ class SQLParser ( Parser ):
                 join = ThetaJoinNode(tab, localctx.c.tj, [','], [])
                 localctx.tj = join
                 localctx.tables = [(None if localctx.t1 is None else localctx.t1.text)] + localctx.c.tables
-                print("---> " + str(localctx.tablesSoFar))
                 pass
 
             elif la_ == 2:
