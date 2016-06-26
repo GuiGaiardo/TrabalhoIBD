@@ -184,6 +184,7 @@ class SQLParser ( Parser ):
                     projection = None
 
             for t in whereTables:
+                print(localctx.fr.tables)
                 if(not t in localctx.fr.tables):
                     print("Unknown table " + t + " being used in where clause")
                     valid_query = 0
@@ -610,7 +611,7 @@ class SQLParser ( Parser ):
             self.state = 75
             localctx.j = self.joins_(localctx.tablesSoFar + [(None if localctx.t1 is None else localctx.t1.text)] + [(None if localctx.t2 is None else localctx.t2.text)])
             join1 = ThetaJoinNode(Table((None if localctx.t1 is None else localctx.t1.text)), Table((None if localctx.t2 is None else localctx.t2.text)), localctx.c.terms, localctx.c.conectors)
-            localctx.tables = [(None if localctx.t1 is None else localctx.t1.text), (None if localctx.t2 is None else localctx.t2.text)]
+            localctx.tables = [(None if localctx.t1 is None else localctx.t1.text), (None if localctx.t2 is None else localctx.t2.text)] + localctx.j.table
             if (localctx.j.table == []):
                 localctx.tj = join1
             else:

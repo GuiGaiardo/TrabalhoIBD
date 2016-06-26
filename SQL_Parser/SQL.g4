@@ -28,6 +28,7 @@ for t in selectingTables:
         projection = None
 
 for t in whereTables:
+    print($fr.tables)
     if(not t in $fr.tables):
         print("Unknown table " + t + " being used in where clause")
         valid_query = 0
@@ -77,7 +78,7 @@ $conectors.append($c.text)}
 $conectors = []};
 
 joins[tablesSoFar] returns[tj, tables] : t1=TABELA JOIN t2=TABELA ON c=conditionsJoin j=joins_[$tablesSoFar + [$t1.text] + [$t2.text]] {join1 = ThetaJoinNode(Table($t1.text), Table($t2.text), $c.terms, $c.conectors)
-$tables = [$t1.text, $t2.text]
+$tables = [$t1.text, $t2.text] + $j.table
 if ($j.table == []):
     $tj = join1
 else:

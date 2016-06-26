@@ -14,11 +14,11 @@ class TreePrinter(FloatLayout):
     query_tree = ObjectProperty(None)
     close = ObjectProperty(None)
     pos_x = -50
-    pos_y = 0
+    pos_y = 100
 
 
     def draw_tree(self):
-        self.size_hint = (0.5, 1.3)
+        self.size_hint = (1, 1.3)
         node = self.query_tree.root
         self.draw_node(node)
 
@@ -89,7 +89,7 @@ class TreePrinter(FloatLayout):
             self.add_widget(lbl)
 
 
-
+#
 # import kivy
 # kivy.require('1.9.1')
 #
@@ -124,6 +124,7 @@ class TreePrinter(FloatLayout):
 #         return v_box1, v_box2
 #
 #     def draw_tree(self):
+#         self.size_hint = (None, None)
 #         root = self.query_tree.root
 #         print(self.size)
 #         print(self.pos)
