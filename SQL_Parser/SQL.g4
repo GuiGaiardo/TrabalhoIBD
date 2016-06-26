@@ -13,13 +13,30 @@ query_tree = QueryTree()
 sql_expr locals []
 @init{
 number = 0
+valid_query = False
+projection = None
+query_tree.set_root(None)
 }
 : SELECT sl=clausulaSelect FROM  fr=clausulaFrom[ [] ] w=where {projection = ProjectionNode($sl.columns)
 theta_join = $fr.tj
 
-selectingTables = [x.split('.')[0] for x in $sl.columns]
-whereTables = [x[0].split('.')[0] for x in $w.terms]
+
+
+if($sl.columns is None):
+    selectingTables = []
+else:
+    selectingTables = [x.split('.')[0] for x in $sl.columns]
+if($w.terms is None):
+    whereTables = []
+else:
+    whereTables = [x[0].split('.')[0] for x in $w.terms]
 valid_query = 1
+
+
+if($sl.columns is None):
+    projection = None
+    valid_query = 0
+
 
 if(not $fr.tables is None):
     for t in selectingTables:
@@ -28,13 +45,15 @@ if(not $fr.tables is None):
             valid_query = 0
             projection = None
 
-    print("--->" , whereTables)
     for t in whereTables:
-        print($fr.tables)
         if(not t in $fr.tables):
             print("Unknown table " + t + " being used in where clause")
             valid_query = 0
             projection = None
+
+
+if($w.terms is None):
+    valid_query = 0
 
 if valid_query:
     if len($w.terms) > 0:
@@ -86,11 +105,7 @@ if ($j.table == []):
 else:
     last_join = join1
     for i in range(len($j.table)):
-        print($j.terms[i])
         last_join = ThetaJoinNode(last_join, Table($j.table[i]), $j.terms[i], $j.conectors[i])
-    $tj = last_join
-    #$tj = ThetaJoinNode(join1, Table($j.table[i]), $j.terms, $j.conectors)
-    #$tables += [$j.table]
 
 for term in $c.terms:
     table1 = term[0].split('.')[0]
@@ -125,8 +140,9 @@ $tables = $j.tables + $c.tables}
 $tj = table
 $tables = [$t.text]};
 
-termo returns[term] : t1=COLUNA o=comparisonOp t2=COLUNA {$term = ($t1.text,$o.text,$t2.text)}
-| t=COLUNA o=comparisonOp a=ATRIBUTO {$term = ($t.text,$o.text,$a.text)};
+termo returns[term] :// t1=COLUNA o=comparisonOp t2=COLUNA {$term = ($t1.text,$o.text,$t2.text)}
+//|
+t=COLUNA o=comparisonOp a=ATRIBUTO {$term = ($t.text,$o.text,$a.text)};
 conector : ('and' | 'or');
 
 

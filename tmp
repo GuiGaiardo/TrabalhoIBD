@@ -1,1 +1,1 @@
-select funcionario.nome from funcionario JOIN aloc ON aloc.func_id = funcionario.id where funcionario.salario > 1000
+select a.a from a join c on a.a=c.c and a.c = c.a where a.a> c5

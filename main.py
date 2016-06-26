@@ -43,6 +43,7 @@ class Root(FloatLayout):
         self.dismiss_popup()
 
     def parse_query(self):
+        print("Run:")
         tree = SQLMain.main(self.text_input.text)
         if not tree.root:
             self.tree = None
