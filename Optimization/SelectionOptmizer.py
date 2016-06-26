@@ -6,7 +6,7 @@ class SelectionOptimizer:
         self.root = tree.root
 
     def optimize(self):
-        if isinstance(self.root.children, ThetaJoinNode):
+        if isinstance(self.root.children, ThetaJoinNode) or isinstance(self.root.children, Table):
             return self.root
 
         selection = self.root.children

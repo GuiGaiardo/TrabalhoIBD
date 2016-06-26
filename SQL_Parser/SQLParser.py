@@ -198,6 +198,9 @@ class SQLParser ( Parser ):
                 else:
                     projection.set_child(theta_join)
 
+            else:
+                projection = None
+
             query_tree.set_root(projection)
         except RecognitionException as re:
             localctx.exception = re

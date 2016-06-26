@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+select a.x
+from a
+=======
 select funcionario.nomeFunc, projetos.nomeProj
 FROM funcionario, projetos JOIN coisas ON projetos.eta = coisas.fi JOIN lala ON lala.sd = coisa.fi
 JOIN birl ON birl.l = coisa.fi
+>>>>>>> 752a5ecf8fa622e2210c80445b1f07e37d6b6f5e
