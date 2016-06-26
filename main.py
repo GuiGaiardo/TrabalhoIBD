@@ -26,6 +26,8 @@ class Root(FloatLayout):
     def dismiss_popup(self):
         self._popup.dismiss()
 
+
+
     def show_load(self):
         content = LoadDialog(load=self.load, cancel=self.dismiss_popup)
         self._popup = Popup(title="Load file", content=content,
@@ -50,8 +52,10 @@ class Root(FloatLayout):
 
     def show_tree(self):
         if self.is_valid:
-            pass
-            # printer = TreePrinter(query_tree)
+            printer = TreePrinter.TreePrinter(query_tree=self.tree, close=self.dismiss_popup)
+            printer.draw_tree()
+            self._popup = Popup(title="Query Tree", content=printer)
+            self._popup.open()
 
     def show_optimized_tree(self):
         if self.is_valid:

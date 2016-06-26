@@ -37,7 +37,7 @@ class SelectionNode():
 
 
     def get_description(self):
-        description = ""
+        description = "S("
 
         if (len(self.terms) == 1):
             description += self.terms[0][0] + self.terms[0][1] + self.terms[0][2]
@@ -47,7 +47,8 @@ class SelectionNode():
                 description += " " + self.terms[i][0] + self.terms[i][1] + self.terms[i][2] + " " + self.conectors[i]
 
             description += " " + self.terms[i+1][0] + self.terms[i+1][1] + self.terms[i+1][2]
-
+        description += ")"
+        
         return description
 
 
@@ -75,9 +76,10 @@ class ProjectionNode():
         self.children = child
 
     def get_description(self):
-        description = self.columns[0]
+        description = "P(" + self.columns[0]
         for column in self.columns[1:]:
             description += ", " + column
+        description += ")"
 
         return description
 

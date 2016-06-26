@@ -1,33 +1,58 @@
 import kivy
 kivy.require('1.9.1')
 
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.label import Label
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.button import Button
 from kivy.properties import ObjectProperty
+from SQL_Parser.QueryTree import *
 
-
-class TreePrinter(BoxLayout):
+class TreePrinter(FloatLayout):
     query_tree = ObjectProperty(None)
     close = ObjectProperty(None)
 
-#CHEIO DE COISA INUTIL, NAO LEVAR EM CONSIDERACAO
+    def __make_node_widget(self, description, level):
+        bt = Button(text=description, pos_hint={'top': 1-level*(.1)}, size_hint=(1, 0.1))
+        return bt
+
+    def __make_box_widget(self, level):
+        v_box1 = FloatLayout(pos_hint={'top': 1-((level+1)*0.1), 'right': 1}, size_hint=(0.5,1-((level+1)*0.1)))
+        v_box2 = FloatLayout(pos_hint={'top': 1-((level+1)*0.1), 'right': 0.5}, size_hint=(0.5,1-((level+1)*0.1)))
+        self.add_widget(v_box1)
+        self.add_widget(v_box2)
+
+        return v_box1, v_box2
+
     def draw_tree(self):
-        node = self.query_tree.root
-        lbl = Label(text=node.get_description())
-        self.add_widget(lbl)
+        root = self.query_tree.root
+        self._draw_tree(root, self, 0)
 
-        node = node.children
-        lbl2 = Label(text=node.get_description())
-        self.add_widget(lbl2)
 
-        node = node.children
-        lblx = Label(text=node.get_description())
-        self.add_widget(lblx)
+    def _draw_tree(self, node, widget, level):
+        if isinstance(node, ProjectionNode):
+            button = self.__make_node_widget(node.get_description(), level)
+            widget.add_widget(button)
+            self._draw_tree(node.children, widget, level+1)
 
-        child1 = node.children[0]
-        child2 = node.children[1]
-        lbl3 = Label(text=child1.get_description())
-        self.add_widget(lbl3)
+        elif isinstance(node, SelectionNode):
+            button = self.__make_node_widget(node.get_description(), level)
+            widget.add_widget(button)
+            self._draw_tree(node.children,widget, level+1)
 
-        lbl4 = Label(text=child2.get_description())
-        self.add_widget(lbl4)
+        elif isinstance(node, ThetaJoinNode):
+            button = self.__make_node_widget(node.get_description(), level)
+            widget.add_widget(button)
+            box1, box2 = self.__make_box_widget(level)
+            level += 1
+            #recursao pro filho da esquerda
+            self._draw_tree(node.children[0], box1, 0)
+            #recursao pro filho da direita
+            self._draw_tree(node.children[1], box2, 0)
+
+        elif isinstance(node, Table):
+            button = self.__make_node_widget(node.get_description(), level)
+            widget.add_widget(button)
+
+        else:
+            print("Erro ao desenhar a arvore")
+
+        return
