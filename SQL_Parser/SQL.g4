@@ -42,6 +42,9 @@ if valid_query:
     else:
         projection.set_child(theta_join)
 
+else:
+    projection = None
+
 query_tree.set_root(projection)};
 
 

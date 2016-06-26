@@ -62,7 +62,10 @@ class Root(FloatLayout):
             optimized_tree = self.tree
             s = SelectionOptimizer(optimized_tree)
             optimized_tree.root = s.optimize()
-            print(str(optimized_tree.root))
+            printer = TreePrinter.TreePrinter(query_tree=optimized_tree, close=self.dismiss_popup)
+            printer.draw_tree()
+            self._popup = Popup(title="Optimized Query Tree", content=printer)
+            self._popup.open()
 
 
 class QueryTree(App):

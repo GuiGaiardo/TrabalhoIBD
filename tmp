@@ -1,2 +1,2 @@
 select a.x
-from a,b,c
+from a

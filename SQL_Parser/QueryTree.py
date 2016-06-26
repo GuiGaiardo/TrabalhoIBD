@@ -2,6 +2,7 @@
 
 class QueryTree():
     def __init__(self):
+        self.root = None
         return
 
     def set_root(self, node):
@@ -117,14 +118,12 @@ class ThetaJoinNode():
         text = ""
 
         if (self.terms[0] == ','):
-            text += " X"
+            text += "X"
 
         elif (len(self.terms) == 1):
-            text += " |X|"
             text += " " + self.terms[0][0] + self.terms[0][1] + self.terms[0][2]
 
         else:
-            text += " |X|"
             for i in range(len(self.conectors)):
                 text += " " + self.terms[i][0] + self.terms[i][1] + self.terms[i][2] + " " + self.conectors[i]
 
