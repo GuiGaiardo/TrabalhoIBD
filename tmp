@@ -1,2 +1,3 @@
-select a.x
-from a,b,c
+select funcionario.nomeFunc, projetos.nomeProj
+FROM funcionario, projetos JOIN coisas ON projetos.eta = coisas.fi JOIN lala ON lala.sd = coisa.fi
+JOIN birl ON birl.l = coisa.fi

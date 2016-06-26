@@ -611,8 +611,13 @@ class SQLParser ( Parser ):
             if (localctx.j.table == []):
                 localctx.tj = join1
             else:
-                localctx.tj = ThetaJoinNode(join1, localctx.j.table, localctx.j.terms, localctx.j.conectors)
-                localctx.tables += localctx.j.table
+                last_join = join1
+                for i in range(len(localctx.j.table)):
+                    print(localctx.j.terms[i])
+                    last_join = ThetaJoinNode(last_join, Table(localctx.j.table[i]), localctx.j.terms[i], localctx.j.conectors[i])
+                localctx.tj = last_join
+                #localctx.tj = ThetaJoinNode(join1, Table(localctx.j.table[i]), localctx.j.terms, localctx.j.conectors)
+                #localctx.tables += [localctx.j.table]
 
             for term in localctx.c.terms:
                 table1 = term[0].split('.')[0]
@@ -695,8 +700,8 @@ class SQLParser ( Parser ):
                 self.state = 82
                 localctx.j = self.joins_(localctx.tablesSoFar + [(None if localctx.t is None else localctx.t.text)])
                 localctx.table = (None if localctx.t is None else localctx.t.text)
-                localctx.terms = localctx.c.terms
-                localctx.conectors = localctx.c.conectors
+                localctx.terms = [localctx.c.terms] + localctx.j.terms
+                localctx.conectors = [localctx.c.conectors] + localctx.j.conectors
                 localctx.table = [(None if localctx.t is None else localctx.t.text)] + localctx.j.table
                 for term in localctx.c.terms:
                     table1 = term[0].split('.')[0]
@@ -706,8 +711,8 @@ class SQLParser ( Parser ):
             elif token in [SQLParser.EOF, SQLParser.T__5, SQLParser.WHERE]:
                 self.enterOuterAlt(localctx, 2)
                 localctx.table = []
-                localctx.terms = None
-                localctx.conectors = None
+                localctx.terms = []
+                localctx.conectors = []
 
             else:
                 raise NoViableAltException(self)

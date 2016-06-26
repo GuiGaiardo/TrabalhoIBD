@@ -78,8 +78,13 @@ $tables = [$t1.text, $t2.text]
 if ($j.table == []):
     $tj = join1
 else:
-    $tj = ThetaJoinNode(join1, $j.table, $j.terms, $j.conectors)
-    $tables += $j.table
+    last_join = join1
+    for i in range(len($j.table)):
+        print($j.terms[i])
+        last_join = ThetaJoinNode(last_join, Table($j.table[i]), $j.terms[i], $j.conectors[i])
+    $tj = last_join
+    #$tj = ThetaJoinNode(join1, Table($j.table[i]), $j.terms, $j.conectors)
+    #$tables += [$j.table]
 
 for term in $c.terms:
     table1 = term[0].split('.')[0]
@@ -91,16 +96,16 @@ for term in $c.terms:
 };
 
 joins_ [tablesSoFar] returns[table, terms, conectors]  : JOIN t=TABELA ON c=conditionsJoin j=joins_[$tablesSoFar + [$t.text]] {$table = $t.text
-$terms = $c.terms
-$conectors = $c.conectors
+$terms = [$c.terms] + $j.terms
+$conectors = [$c.conectors] + $j.conectors
 $table = [$t.text] + $j.table
 for term in $c.terms:
     table1 = term[0].split('.')[0]
     if table1 not in ($tablesSoFar + [$t.text]):
         print("Unknown table " + table1 + " referenced in JOIN condition")}
 | {$table = []
-$terms = None
-$conectors = None};
+$terms = []
+$conectors = []};
 
 clausulaFrom[tablesSoFar] returns[tj, tables] : t1=TABELA ',' c=clausulaFrom[$tablesSoFar + [$t1.text]]{tab = Table($t1.text)
 join = ThetaJoinNode(tab, $c.tj, [','], [])
