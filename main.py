@@ -52,6 +52,7 @@ class Root(FloatLayout):
             print(str(tree.root))
 
     def show_tree(self):
+        self.parse_query()
         if self.is_valid:
             printer = TreePrinter.TreePrinter(query_tree=self.tree, close=self.dismiss_popup)
             printer.draw_tree()
@@ -59,9 +60,9 @@ class Root(FloatLayout):
             self._popup.open()
 
     def show_optimized_tree(self):
+        self.parse_query()
         if self.is_valid:
             optimized_tree = self.tree
-            self.parse_query()
             s = SelectionOptimizer(optimized_tree)
             optimized_tree.root = s.optimize()
             p = ProjectionOptimizer(optimized_tree)
