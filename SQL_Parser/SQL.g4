@@ -21,18 +21,20 @@ selectingTables = [x.split('.')[0] for x in $sl.columns]
 whereTables = [x[0].split('.')[0] for x in $w.terms]
 valid_query = 1
 
-for t in selectingTables:
-    if(not t in $fr.tables):
-        print("Selecting unknow table " + t)
-        valid_query = 0
-        projection = None
+if(not $fr.tables is None):
+    for t in selectingTables:
+        if(not t in $fr.tables):
+            print("Selecting unknow table " + t)
+            valid_query = 0
+            projection = None
 
-for t in whereTables:
-    print($fr.tables)
-    if(not t in $fr.tables):
-        print("Unknown table " + t + " being used in where clause")
-        valid_query = 0
-        projection = None
+    print("--->" , whereTables)
+    for t in whereTables:
+        print($fr.tables)
+        if(not t in $fr.tables):
+            print("Unknown table " + t + " being used in where clause")
+            valid_query = 0
+            projection = None
 
 if valid_query:
     if len($w.terms) > 0:
@@ -140,8 +142,8 @@ JOIN   : J O I N;
 ON     : O N;
 
 ATRIBUTO : ('\'' | '\"') ('a'..'z' |'A'..'Z' | ' ')+ ('\'' | '\"') | ('0' .. '9')+ ('.' ('0' .. '9')+ | );
-COLUNA : ('a'..'z' |'A'..'Z' )('a'..'z' |'A'..'Z' | '0' .. '9')*'.'('a'..'z' |'A'..'Z' )('a'..'z' |'A'..'Z' | '0' .. '9')*;
-TABELA : ('a'..'z' |'A'..'Z' )('a'..'z' |'A'..'Z' | '0' .. '9')*;
+COLUNA : ('a'..'z' |'A'..'Z' )('a'..'z' |'A'..'Z' | '0' .. '9'| '_' | '-')*'.'('a'..'z' |'A'..'Z' )('a'..'z' |'A'..'Z' | '0' .. '9'| '_' | '-')*;
+TABELA : ('a'..'z' |'A'..'Z' )('a'..'z' |'A'..'Z' | '0' .. '9'| '_' | '-')*;
 
 
 fragment A:('a'|'A');

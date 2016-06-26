@@ -177,18 +177,20 @@ class SQLParser ( Parser ):
             whereTables = [x[0].split('.')[0] for x in localctx.w.terms]
             valid_query = 1
 
-            for t in selectingTables:
-                if(not t in localctx.fr.tables):
-                    print("Selecting unknow table " + t)
-                    valid_query = 0
-                    projection = None
+            if(not localctx.fr.tables is None):
+                for t in selectingTables:
+                    if(not t in localctx.fr.tables):
+                        print("Selecting unknow table " + t)
+                        valid_query = 0
+                        projection = None
 
-            for t in whereTables:
-                print(localctx.fr.tables)
-                if(not t in localctx.fr.tables):
-                    print("Unknown table " + t + " being used in where clause")
-                    valid_query = 0
-                    projection = None
+                print("--->" , whereTables)
+                for t in whereTables:
+                    print(localctx.fr.tables)
+                    if(not t in localctx.fr.tables):
+                        print("Unknown table " + t + " being used in where clause")
+                        valid_query = 0
+                        projection = None
 
             if valid_query:
                 if len(localctx.w.terms) > 0:
