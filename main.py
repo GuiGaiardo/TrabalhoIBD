@@ -4,6 +4,7 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.factory import Factory
 from kivy.properties import ObjectProperty
 from kivy.uix.popup import Popup
+from kivy.uix.scrollview import ScrollView
 import os
 
 from TreePrinter import TreePrinter
@@ -56,7 +57,9 @@ class Root(FloatLayout):
         if self.is_valid:
             printer = TreePrinter.TreePrinter(query_tree=self.tree, close=self.dismiss_popup)
             printer.draw_tree()
-            self._popup = Popup(title="Query Tree", content=printer)
+            root = ScrollView(size_hint=(None, None), size=(1400, 1400))
+            root.add_widget(printer)
+            self._popup = Popup(title="Query Tree (Scroll down to exit", content=root)
             self._popup.open()
 
     def show_optimized_tree(self):
@@ -67,9 +70,12 @@ class Root(FloatLayout):
             optimized_tree.root = s.optimize()
             p = ProjectionOptimizer(optimized_tree)
             optimized_tree.root = p.optimize()
+            root = ScrollView(size_hint=(None, None), size=(1400, 1400))
+
             printer = TreePrinter.TreePrinter(query_tree=optimized_tree, close=self.dismiss_popup)
             printer.draw_tree()
-            self._popup = Popup(title="Optimized Query Tree", content=printer)
+            root.add_widget(printer)
+            self._popup = Popup(title="Optimized Query Tree (Scroll down to exit)", content=root)
             self._popup.open()
 
 
