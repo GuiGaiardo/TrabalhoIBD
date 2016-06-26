@@ -9,7 +9,7 @@ import os
 from TreePrinter import TreePrinter
 from SQL_Parser import SQLMain
 from Optimization.SelectionOptmizer import *
-# from Optimization.ProjectionOptimizer import *
+from Optimization.ProjectionOptimizer import *
 
 kivy.require('1.9.1')
 
@@ -61,23 +61,16 @@ class Root(FloatLayout):
     def show_optimized_tree(self):
         if self.is_valid:
             optimized_tree = self.tree
-
+            self.parse_query()
             s = SelectionOptimizer(optimized_tree)
             optimized_tree.root = s.optimize()
-<<<<<<< HEAD
+            p = ProjectionOptimizer(optimized_tree)
+            optimized_tree.root = p.optimize()
             printer = TreePrinter.TreePrinter(query_tree=optimized_tree, close=self.dismiss_popup)
             printer.draw_tree()
             self._popup = Popup(title="Optimized Query Tree", content=printer)
             self._popup.open()
-=======
-            # p = ProjectionOptimizer(optimized_tree)
-            # optimized_tree.root = p.optimize()
-            printer = TreePrinter.TreePrinter(query_tree=optimized_tree, close=self.dismiss_popup)
-            printer.draw_tree()
-            self._popup = Popup(title="Query Tree", content=printer)
-            self._popup.open()
-            self.parse_query()
->>>>>>> 752a5ecf8fa622e2210c80445b1f07e37d6b6f5e
+
 
 
 class QueryTree(App):
