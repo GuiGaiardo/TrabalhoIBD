@@ -71,6 +71,7 @@ class Root(FloatLayout):
             optimized_tree.root = s.optimize()
             p = ProjectionOptimizer(optimized_tree)
             optimized_tree.root = p.optimize()
+            print(str(optimized_tree.root))
             root = ScrollView(size_hint=(None, None), size=(1400, 1400))
 
             printer = TreePrinter.TreePrinter(query_tree=optimized_tree, close=self.dismiss_popup)

@@ -17,18 +17,14 @@ class SelectionOptimizer:
 
         unaries, binaries = self.__separate_terms(terms)
         son = selection.children
-        tables, unaries, binaries = self._optimize(son, unaries, binaries)
+        self._optimize(son, unaries, binaries)
 
-        if len(binaries) > 0:
-            selection.terms = binaries
-            n_conectors = len(selection.terms) - 1
-            selection.conectors = ["and" for i in range(n_conectors)]
-
-        else:
-            self.root.children = son
+        self.root.children = son
 
         return self.root
 
+    #  varre a arvore recursivamente posicionando selecoes unarias acima das tabelas
+    # e selecoes binarias juntando com theta_joins
     def _optimize(self, node, unaries, binaries):
         left = node.children[0]
         right = node.children[1]
@@ -48,24 +44,11 @@ class SelectionOptimizer:
         elif isinstance(left, ThetaJoinNode):
             tables, unaries, binaries = self._optimize(left, unaries, binaries)
 
-            terms = []
-            for term in binaries:
-                t1 = term[0][0]
-                t2 = term[0][1]
-                if (t1 in tables) and (t2 in tables):
-                    terms.append(binaries.pop(binaries.index(term))[1])
-
-            if len(terms) > 0:
-                new_selection = SelectionNode(terms, ['and' for i in range(len(terms) - 1)])
-                new_selection.set_child(left)
-                node.children[0] = new_selection
-
         else:
-            print("deu merda")
+            print("Deu ruim!")
 
         if isinstance(right, Table):
             right_table = right.get_description()
-            tables.append(right_table)
             terms = []
             for term in unaries:
                 if term[0] == right_table:
@@ -76,28 +59,37 @@ class SelectionOptimizer:
                 new_selection1.set_child(right)
                 node.children[1] = new_selection1
 
+            for term in binaries:
+                for l_t in tables:
+                    if l_t in term[0] and right_table in term[0]:
+                        if node.terms[0] == ',':
+                            node.terms = [binaries.pop(binaries.index(term))[1]]
+                            node.conectors = ['and']
+                        else:
+                            node.terms.append(binaries.pop(binaries.index(term))[1])
+                            node.conectors.append('and')
+            tables.append(right_table)
+
         elif isinstance(right, ThetaJoinNode):
             t, unaries, binaries = self._optimize(right, unaries, binaries)
             tables += t
 
-            terms = []
             for term in binaries:
-                t1 = term[0][0]
-                t2 = term[0][1]
-                if (t1 in tables) and (t2 in tables):
-                    terms.append(binaries.pop(binaries.index(term))[1])
-
-            if len(terms) > 0:
-                new_selection = SelectionNode(terms, ['and' for i in range(len(terms) - 1)])
-                new_selection.set_child(left)
-                node.children[1] = new_selection
+                if term[0][0] in tables and term[0][1] in tables:
+                    if node.terms[0] == ',':
+                        node.terms = [binaries.pop(binaries.index(term))[1]]
+                        node.conectors = ['and']
+                    else:
+                        node.terms.append(binaries.pop(binaries.index(term))[1])
+                        node.conectors.append('and')
 
         else:
-            print("DEU RUIM!")
+            print("Deu ruim!")
 
         return tables, unaries, binaries
 
-    # Separa os termos que utilizam apenas uma tabela dos que utilizam duas tabelas distintas
+    # Separa os termos que utilizam apenas uma tabela (unarios)
+    # dos que utilizam duas tabelas distintas (binarios)
     def __separate_terms(self, terms):
         unaries = []
         binaries = []
@@ -109,6 +101,7 @@ class SelectionOptimizer:
                 binaries.append((tables, term))
         return unaries, binaries
 
+    # retorna as tabelas envolvidas em um termo
     def __get_tables(self, term):
         table1 = term[0]
         dot = table1.index('.')

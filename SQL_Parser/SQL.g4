@@ -106,6 +106,7 @@ else:
     last_join = join1
     for i in range(len($j.table)):
         last_join = ThetaJoinNode(last_join, Table($j.table[i]), $j.terms[i], $j.conectors[i])
+        $tj = last_join
 
 for term in $c.terms:
     table1 = term[0].split('.')[0]
@@ -140,9 +141,8 @@ $tables = $j.tables + $c.tables}
 $tj = table
 $tables = [$t.text]};
 
-termo returns[term] :// t1=COLUNA o=comparisonOp t2=COLUNA {$term = ($t1.text,$o.text,$t2.text)}
-//|
-t=COLUNA o=comparisonOp a=ATRIBUTO {$term = ($t.text,$o.text,$a.text)};
+termo returns[term] : t1=COLUNA o=comparisonOp t2=COLUNA {$term = ($t1.text,$o.text,$t2.text)}
+| t=COLUNA o=comparisonOp a=ATRIBUTO {$term = ($t.text,$o.text,$a.text)};
 conector : ('and' | 'or');
 
 

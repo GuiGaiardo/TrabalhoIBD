@@ -1,2 +1,14 @@
 select funcionario.nomeFunc, projetos.nomeProj
 FROM funcionario, projetos JOIN coisas ON projetos.eta = coisas.fi JOIN lala ON lala.sd = coisa.fi
+
+select a.x
+from a join b on a.x=b.x
+where a.y=b.y
+
+select a.x, b.x
+from a,b,c
+where a.a=b.b and b.b=c.c and a>1000
+
+select a.x, b.x, c.x
+from a,b join c on b.b=c.c join d on d.d=c.w
+where b.a=c.s and a.b=b.q

@@ -10,7 +10,7 @@ query_tree = QueryTree()
 def serializedATN():
     with StringIO() as buf:
         buf.write("\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\23")
-        buf.write("s\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b")
+        buf.write("z\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b")
         buf.write("\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\3\2\3\2\3\2\3\2")
         buf.write("\3\2\3\2\3\2\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5")
         buf.write("\4*\n\4\3\5\3\5\3\5\3\5\3\5\5\5\61\n\5\3\6\3\6\3\6\3\6")
@@ -18,31 +18,34 @@ def serializedATN():
         buf.write("\3\7\3\7\3\7\5\7G\n\7\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b")
         buf.write("\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\5\tY\n\t\3\n\3\n\3\n")
         buf.write("\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\5\nj")
-        buf.write("\n\n\3\13\3\13\3\13\3\13\3\13\3\f\3\f\3\f\2\2\r\2\4\6")
-        buf.write("\b\n\f\16\20\22\24\26\2\4\3\2\3\7\3\2\t\no\2\30\3\2\2")
-        buf.write("\2\4\37\3\2\2\2\6)\3\2\2\2\b\60\3\2\2\2\n9\3\2\2\2\fF")
-        buf.write("\3\2\2\2\16H\3\2\2\2\20X\3\2\2\2\22i\3\2\2\2\24k\3\2\2")
-        buf.write("\2\26p\3\2\2\2\30\31\7\f\2\2\31\32\5\n\6\2\32\33\7\r\2")
-        buf.write("\2\33\34\5\22\n\2\34\35\5\b\5\2\35\36\b\2\1\2\36\3\3\2")
-        buf.write("\2\2\37 \t\2\2\2 \5\3\2\2\2!\"\5\24\13\2\"#\5\26\f\2#")
-        buf.write("$\5\6\4\2$%\b\4\1\2%*\3\2\2\2&\'\5\24\13\2\'(\b\4\1\2")
-        buf.write("(*\3\2\2\2)!\3\2\2\2)&\3\2\2\2*\7\3\2\2\2+,\7\16\2\2,")
-        buf.write("-\5\6\4\2-.\b\5\1\2.\61\3\2\2\2/\61\b\5\1\2\60+\3\2\2")
-        buf.write("\2\60/\3\2\2\2\61\t\3\2\2\2\62\63\7\22\2\2\63\64\7\b\2")
-        buf.write("\2\64\65\5\n\6\2\65\66\b\6\1\2\66:\3\2\2\2\678\7\22\2")
-        buf.write("\28:\b\6\1\29\62\3\2\2\29\67\3\2\2\2:\13\3\2\2\2;<\7\22")
-        buf.write("\2\2<=\7\7\2\2=>\7\22\2\2>?\5\26\f\2?@\5\f\7\2@A\b\7\1")
-        buf.write("\2AG\3\2\2\2BC\7\22\2\2CD\7\7\2\2DE\7\22\2\2EG\b\7\1\2")
-        buf.write("F;\3\2\2\2FB\3\2\2\2G\r\3\2\2\2HI\7\23\2\2IJ\7\17\2\2")
-        buf.write("JK\7\23\2\2KL\7\20\2\2LM\5\f\7\2MN\5\20\t\2NO\b\b\1\2")
-        buf.write("O\17\3\2\2\2PQ\7\17\2\2QR\7\23\2\2RS\7\20\2\2ST\5\f\7")
-        buf.write("\2TU\5\20\t\2UV\b\t\1\2VY\3\2\2\2WY\b\t\1\2XP\3\2\2\2")
-        buf.write("XW\3\2\2\2Y\21\3\2\2\2Z[\7\23\2\2[\\\7\b\2\2\\]\5\22\n")
-        buf.write("\2]^\b\n\1\2^j\3\2\2\2_`\5\16\b\2`a\b\n\1\2aj\3\2\2\2")
-        buf.write("bc\5\16\b\2cd\7\b\2\2de\5\22\n\2ef\b\n\1\2fj\3\2\2\2g")
-        buf.write("h\7\23\2\2hj\b\n\1\2iZ\3\2\2\2i_\3\2\2\2ib\3\2\2\2ig\3")
-        buf.write("\2\2\2j\23\3\2\2\2kl\7\22\2\2lm\5\4\3\2mn\7\21\2\2no\b")
-        buf.write("\13\1\2o\25\3\2\2\2pq\t\3\2\2q\27\3\2\2\2\b)\609FXi")
+        buf.write("\n\n\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13")
+        buf.write("\5\13v\n\13\3\f\3\f\3\f\2\2\r\2\4\6\b\n\f\16\20\22\24")
+        buf.write("\26\2\4\3\2\3\7\3\2\t\nw\2\30\3\2\2\2\4\37\3\2\2\2\6)")
+        buf.write("\3\2\2\2\b\60\3\2\2\2\n9\3\2\2\2\fF\3\2\2\2\16H\3\2\2")
+        buf.write("\2\20X\3\2\2\2\22i\3\2\2\2\24u\3\2\2\2\26w\3\2\2\2\30")
+        buf.write("\31\7\f\2\2\31\32\5\n\6\2\32\33\7\r\2\2\33\34\5\22\n\2")
+        buf.write("\34\35\5\b\5\2\35\36\b\2\1\2\36\3\3\2\2\2\37 \t\2\2\2")
+        buf.write(" \5\3\2\2\2!\"\5\24\13\2\"#\5\26\f\2#$\5\6\4\2$%\b\4\1")
+        buf.write("\2%*\3\2\2\2&\'\5\24\13\2\'(\b\4\1\2(*\3\2\2\2)!\3\2\2")
+        buf.write("\2)&\3\2\2\2*\7\3\2\2\2+,\7\16\2\2,-\5\6\4\2-.\b\5\1\2")
+        buf.write(".\61\3\2\2\2/\61\b\5\1\2\60+\3\2\2\2\60/\3\2\2\2\61\t")
+        buf.write("\3\2\2\2\62\63\7\22\2\2\63\64\7\b\2\2\64\65\5\n\6\2\65")
+        buf.write("\66\b\6\1\2\66:\3\2\2\2\678\7\22\2\28:\b\6\1\29\62\3\2")
+        buf.write("\2\29\67\3\2\2\2:\13\3\2\2\2;<\7\22\2\2<=\7\7\2\2=>\7")
+        buf.write("\22\2\2>?\5\26\f\2?@\5\f\7\2@A\b\7\1\2AG\3\2\2\2BC\7\22")
+        buf.write("\2\2CD\7\7\2\2DE\7\22\2\2EG\b\7\1\2F;\3\2\2\2FB\3\2\2")
+        buf.write("\2G\r\3\2\2\2HI\7\23\2\2IJ\7\17\2\2JK\7\23\2\2KL\7\20")
+        buf.write("\2\2LM\5\f\7\2MN\5\20\t\2NO\b\b\1\2O\17\3\2\2\2PQ\7\17")
+        buf.write("\2\2QR\7\23\2\2RS\7\20\2\2ST\5\f\7\2TU\5\20\t\2UV\b\t")
+        buf.write("\1\2VY\3\2\2\2WY\b\t\1\2XP\3\2\2\2XW\3\2\2\2Y\21\3\2\2")
+        buf.write("\2Z[\7\23\2\2[\\\7\b\2\2\\]\5\22\n\2]^\b\n\1\2^j\3\2\2")
+        buf.write("\2_`\5\16\b\2`a\b\n\1\2aj\3\2\2\2bc\5\16\b\2cd\7\b\2\2")
+        buf.write("de\5\22\n\2ef\b\n\1\2fj\3\2\2\2gh\7\23\2\2hj\b\n\1\2i")
+        buf.write("Z\3\2\2\2i_\3\2\2\2ib\3\2\2\2ig\3\2\2\2j\23\3\2\2\2kl")
+        buf.write("\7\22\2\2lm\5\4\3\2mn\7\22\2\2no\b\13\1\2ov\3\2\2\2pq")
+        buf.write("\7\22\2\2qr\5\4\3\2rs\7\21\2\2st\b\13\1\2tv\3\2\2\2uk")
+        buf.write("\3\2\2\2up\3\2\2\2v\25\3\2\2\2wx\t\3\2\2x\27\3\2\2\2\t")
+        buf.write(")\609FXiu")
         return buf.getvalue()
 
 
@@ -636,6 +639,7 @@ class SQLParser ( Parser ):
                 last_join = join1
                 for i in range(len(localctx.j.table)):
                     last_join = ThetaJoinNode(last_join, Table(localctx.j.table[i]), localctx.j.terms[i], localctx.j.conectors[i])
+                    localctx.tj = last_join
 
             for term in localctx.c.terms:
                 table1 = term[0].split('.')[0]
@@ -848,12 +852,17 @@ class SQLParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
             self.term = None
-            self.t = None # Token
+            self.t1 = None # Token
             self.o = None # ComparisonOpContext
+            self.t2 = None # Token
+            self.t = None # Token
             self.a = None # Token
 
-        def COLUNA(self):
-            return self.getToken(SQLParser.COLUNA, 0)
+        def COLUNA(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLParser.COLUNA)
+            else:
+                return self.getToken(SQLParser.COLUNA, i)
 
         def comparisonOp(self):
             return self.getTypedRuleContext(SQLParser.ComparisonOpContext,0)
@@ -881,14 +890,32 @@ class SQLParser ( Parser ):
         localctx = SQLParser.TermoContext(self, self._ctx, self.state)
         self.enterRule(localctx, 18, self.RULE_termo)
         try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 105
-            localctx.t = self.match(SQLParser.COLUNA)
-            self.state = 106
-            localctx.o = self.comparisonOp()
-            self.state = 107
-            localctx.a = self.match(SQLParser.ATRIBUTO)
-            localctx.term = ((None if localctx.t is None else localctx.t.text),(None if localctx.o is None else self._input.getText((localctx.o.start,localctx.o.stop))),(None if localctx.a is None else localctx.a.text))
+            self.state = 115
+            self._errHandler.sync(self);
+            la_ = self._interp.adaptivePredict(self._input,6,self._ctx)
+            if la_ == 1:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 105
+                localctx.t1 = self.match(SQLParser.COLUNA)
+                self.state = 106
+                localctx.o = self.comparisonOp()
+                self.state = 107
+                localctx.t2 = self.match(SQLParser.COLUNA)
+                localctx.term = ((None if localctx.t1 is None else localctx.t1.text),(None if localctx.o is None else self._input.getText((localctx.o.start,localctx.o.stop))),(None if localctx.t2 is None else localctx.t2.text))
+                pass
+
+            elif la_ == 2:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 110
+                localctx.t = self.match(SQLParser.COLUNA)
+                self.state = 111
+                localctx.o = self.comparisonOp()
+                self.state = 112
+                localctx.a = self.match(SQLParser.ATRIBUTO)
+                localctx.term = ((None if localctx.t is None else localctx.t.text),(None if localctx.o is None else self._input.getText((localctx.o.start,localctx.o.stop))),(None if localctx.a is None else localctx.a.text))
+                pass
+
+
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -925,7 +952,7 @@ class SQLParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 110
+            self.state = 117
             _la = self._input.LA(1)
             if not(_la==SQLParser.T__6 or _la==SQLParser.T__7):
                 self._errHandler.recoverInline(self)

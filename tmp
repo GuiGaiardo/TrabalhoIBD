@@ -1,1 +1,3 @@
-select a.a from a join c on a.a=c.c and a.c = c.a where a.a> c5
+select a.x, b.x, c.x
+from a,b join c on b.b=c.c join d on d.d=c.w
+where b.a=c.s and a.b=b.q
