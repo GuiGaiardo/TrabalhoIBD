@@ -3,6 +3,7 @@
 class QueryTree():
     def __init__(self):
         self.root = None
+        self.valid = True
         return
 
     def set_root(self, node):

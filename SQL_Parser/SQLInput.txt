@@ -10,5 +10,5 @@ from a,b,c
 where a.a=b.b and b.b=c.c and a>1000
 
 select a.x, b.x, c.x
-from a,b join c on b.b=c.c join d on d.d=c.w
+from a,b join c on b.b=c.c join d on d.d=a.w
 where b.a=c.s and a.b=b.q

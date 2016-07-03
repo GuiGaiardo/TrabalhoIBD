@@ -111,3 +111,12 @@ class SQLListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by SQLParser#anythingElse.
+    def enterAnythingElse(self, ctx:SQLParser.AnythingElseContext):
+        pass
+
+    # Exit a parse tree produced by SQLParser#anythingElse.
+    def exitAnythingElse(self, ctx:SQLParser.AnythingElseContext):
+        pass
+
+

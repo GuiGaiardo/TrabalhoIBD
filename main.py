@@ -60,7 +60,7 @@ class Root(FloatLayout):
             printer.draw_tree()
             root = ScrollView(size_hint=(None, None), size=(1400, 1400))
             root.add_widget(printer)
-            self._popup = Popup(title="Query Tree (Scroll down to exit", content=root)
+            self._popup = Popup(title="Query Tree (Scroll down to exit)", content=root)
             self._popup.open()
 
     def show_optimized_tree(self):
@@ -80,11 +80,8 @@ class Root(FloatLayout):
             self._popup = Popup(title="Optimized Query Tree (Scroll down to exit)", content=root)
             self._popup.open()
 
-
-
 class QueryTree(App):
     pass
-
 
 Factory.register('Root', cls=Root)
 Factory.register('LoadDialog', cls=LoadDialog)

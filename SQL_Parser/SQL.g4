@@ -17,7 +17,7 @@ valid_query = False
 projection = None
 query_tree.set_root(None)
 }
-: SELECT sl=clausulaSelect FROM  fr=clausulaFrom[ [] ] w=where {projection = ProjectionNode($sl.columns)
+: SELECT sl=clausulaSelect FROM  fr=clausulaFrom[ [] ] w=where r=anythingElse {projection = ProjectionNode($sl.columns)
 theta_join = $fr.tj
 
 
@@ -37,6 +37,9 @@ if($sl.columns is None):
     projection = None
     valid_query = 0
 
+if($fr.tj is None):
+    valid_query = 0
+    projection = None
 
 if(not $fr.tables is None):
     for t in selectingTables:
@@ -66,6 +69,14 @@ if valid_query:
 
 else:
     projection = None
+
+if $r.trailing_str == None or $r.trailing_str.strip(" ") == "":
+    pass
+else:
+    projection = None
+    print("Not viable input at ", $r.trailing_str)
+
+
 
 query_tree.set_root(projection)};
 
@@ -99,6 +110,7 @@ $conectors.append($c.text)}
 $conectors = []};
 
 joins[tablesSoFar] returns[tj, tables] : t1=TABELA JOIN t2=TABELA ON c=conditionsJoin j=joins_[$tablesSoFar + [$t1.text] + [$t2.text]] {join1 = ThetaJoinNode(Table($t1.text), Table($t2.text), $c.terms, $c.conectors)
+print($tablesSoFar)
 $tables = [$t1.text, $t2.text] + $j.table
 if ($j.table == []):
     $tj = join1
@@ -113,29 +125,51 @@ for term in $c.terms:
     table2 = term[2].split('.')[0]
     if table1 not in ($tablesSoFar + [$t1.text] + [$t2.text]):
         print("Unknown table " + table1 + " referenced in JOIN condition")
+        $tj = None
     if table2 not in ($tablesSoFar + [$t1.text] + [$t2.text]):
         print("Unknown table " + table2 + " referenced in JOIN condition")
+        $tj = None
+
+if None in $j.table:
+    $tj = None
 };
 
 joins_ [tablesSoFar] returns[table, terms, conectors]  : JOIN t=TABELA ON c=conditionsJoin j=joins_[$tablesSoFar + [$t.text]] {$table = $t.text
+print($tablesSoFar)
 $terms = [$c.terms] + $j.terms
 $conectors = [$c.conectors] + $j.conectors
 $table = [$t.text] + $j.table
 for term in $c.terms:
     table1 = term[0].split('.')[0]
+    table2 = term[2].split('.')[0]
+
     if table1 not in ($tablesSoFar + [$t.text]):
-        print("Unknown table " + table1 + " referenced in JOIN condition")}
+        print("Unknown table " + table1 + " referenced in JOIN condition")
+        $table += [None]
+    if table2 not in ($tablesSoFar + [$t.text]):
+        print("Unknown table " + table2 + " referenced in JOIN condition")
+        $table += [None]}
 | {$table = []
 $terms = []
 $conectors = []};
 
-clausulaFrom[tablesSoFar] returns[tj, tables] : t1=TABELA ',' c=clausulaFrom[$tablesSoFar + [$t1.text]]{tab = Table($t1.text)
-join = ThetaJoinNode(tab, $c.tj, [','], [])
+//clausulaFrom[tablesSoFar] returns[tj, tables] : t1=TABELA ',' c=clausulaFrom[$tablesSoFar + [$t1.text]]{tab = Table($t1.text)
+clausulaFrom[tablesSoFar] returns[tj, tables] : t1=TABELA ',' c=clausulaFrom[$tablesSoFar]{tab = Table($t1.text)
+
+if $c.tj is None:
+    join = None
+else:
+    join = ThetaJoinNode(tab, $c.tj, [','], [])
 $tj = join
 $tables = [$t1.text] + $c.tables}
 | j=joins[$tablesSoFar] {$tj = $j.tj
 $tables = $j.tables}
-| j=joins[$tablesSoFar] ',' c=clausulaFrom[$j.tables + $tablesSoFar ] {$tj = ThetaJoinNode($j.tj, $c.tj, [','], [])
+| j=joins[$tablesSoFar] ',' c=clausulaFrom[$j.tables + $tablesSoFar ] {
+
+if $c.tj is None or $j.tj is None:
+    $tj = None
+else:
+    $tj = ThetaJoinNode($j.tj, $c.tj, [','], [])
 $tables = $j.tables + $c.tables}
 | t=TABELA {table = Table($text)
 $tj = table
@@ -144,6 +178,11 @@ $tables = [$t.text]};
 termo returns[term] : t1=COLUNA o=comparisonOp t2=COLUNA {$term = ($t1.text,$o.text,$t2.text)}
 | t=COLUNA o=comparisonOp a=ATRIBUTO {$term = ($t.text,$o.text,$a.text)};
 conector : ('and' | 'or');
+
+
+anythingElse returns[trailing_str] : t=.* {
+$trailing_str = $t.text
+ };
 
 
 
@@ -160,6 +199,9 @@ ON     : O N;
 ATRIBUTO : ('\'' | '\"') ('a'..'z' |'A'..'Z' | ' ')+ ('\'' | '\"') | ('0' .. '9')+ ('.' ('0' .. '9')+ | );
 COLUNA : ('a'..'z' |'A'..'Z' )('a'..'z' |'A'..'Z' | '0' .. '9'| '_' | '-')*'.'('a'..'z' |'A'..'Z' )('a'..'z' |'A'..'Z' | '0' .. '9'| '_' | '-')*;
 TABELA : ('a'..'z' |'A'..'Z' )('a'..'z' |'A'..'Z' | '0' .. '9'| '_' | '-')*;
+
+
+
 
 
 fragment A:('a'|'A');
