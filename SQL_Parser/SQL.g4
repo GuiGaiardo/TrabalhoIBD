@@ -20,8 +20,6 @@ query_tree.set_root(None)
 : SELECT sl=clausulaSelect FROM  fr=clausulaFrom[ [] ] w=where r=anythingElse {projection = ProjectionNode($sl.columns)
 theta_join = $fr.tj
 
-
-
 if($sl.columns is None):
     selectingTables = []
 else:
@@ -44,13 +42,15 @@ if($fr.tj is None):
 if(not $fr.tables is None):
     for t in selectingTables:
         if(not t in $fr.tables):
-            print("Selecting unknow table " + t)
+            msg = "Selecting unknow table " + t
+            query_tree.set_error(msg)
             valid_query = 0
             projection = None
 
     for t in whereTables:
         if(not t in $fr.tables):
-            print("Unknown table " + t + " being used in where clause")
+            msg = "Unknown table " + t + " being used in where clause"
+            query_tree.set_error(msg)
             valid_query = 0
             projection = None
 
@@ -74,7 +74,8 @@ if $r.trailing_str == None or $r.trailing_str.strip(" ") == "":
     pass
 else:
     projection = None
-    print("Not viable input at ", $r.trailing_str)
+    msg = "Not viable input at " + $r.trailing_str
+    query_tree.set_error(msg)
 
 
 
@@ -124,10 +125,12 @@ for term in $c.terms:
     table1 = term[0].split('.')[0]
     table2 = term[2].split('.')[0]
     if table1 not in ($tablesSoFar + [$t1.text] + [$t2.text]):
-        print("Unknown table " + table1 + " referenced in JOIN condition")
+        msg = "Unknown table " + table1 + " referenced in JOIN condition"
+        query_tree.set_error(msg)
         $tj = None
     if table2 not in ($tablesSoFar + [$t1.text] + [$t2.text]):
-        print("Unknown table " + table2 + " referenced in JOIN condition")
+        msg = "Unknown table " + table2 + " referenced in JOIN condition"
+        query_tree.set_error(msg)
         $tj = None
 
 if None in $j.table:
@@ -144,10 +147,12 @@ for term in $c.terms:
     table2 = term[2].split('.')[0]
 
     if table1 not in ($tablesSoFar + [$t.text]):
-        print("Unknown table " + table1 + " referenced in JOIN condition")
+        msg = "Unknown table " + table1 + " referenced in JOIN condition"
+        query_tree.set_error(msg)
         $table += [None]
     if table2 not in ($tablesSoFar + [$t.text]):
-        print("Unknown table " + table2 + " referenced in JOIN condition")
+        msg = "Unknown table " + table2 + " referenced in JOIN condition"
+        query_tree.set_error(msg)
         $table += [None]}
 | {$table = []
 $terms = []

@@ -1,6 +1,8 @@
 import kivy
 from kivy.app import App
 from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.label import Label
 from kivy.factory import Factory
 from kivy.properties import ObjectProperty
 from kivy.uix.popup import Popup
@@ -13,6 +15,13 @@ from Optimization.SelectionOptmizer import *
 from Optimization.ProjectionOptimizer import *
 
 kivy.require('1.9.1')
+
+
+class ErrorDialog(BoxLayout):
+    def show_errors(self, errors):
+        for error in errors:
+            print(error)
+            self.add_widget(Label(text=error[0]))
 
 
 class LoadDialog(FloatLayout):
@@ -44,10 +53,21 @@ class Root(FloatLayout):
 
     def parse_query(self):
         print("Run:")
-        tree = SQLMain.main(self.text_input.text)
+        tree, errors = SQLMain.main(self.text_input.text)
         if not tree.root:
             self.tree = None
             self.is_valid = False
+
+            if len(tree.errors) > 0:
+                error_dialog = ErrorDialog()
+                error_dialog.show_errors(tree.errors)
+                Popup(title="Semantic Errors", content=error_dialog).open()
+
+            if len(errors) > 0:
+                error_dialog = ErrorDialog()
+                error_dialog.show_errors(errors)
+                Popup(title="Syntax Errors", content=error_dialog).open()
+
         else:
             self.is_valid = True
             self.tree = tree

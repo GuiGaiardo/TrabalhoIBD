@@ -4,11 +4,14 @@ class QueryTree():
     def __init__(self):
         self.root = None
         self.valid = True
+        self.errors = []
         return
 
     def set_root(self, node):
         self.root = node
 
+    def set_error(self, error):
+        self.errors.append([error])
 
 
 

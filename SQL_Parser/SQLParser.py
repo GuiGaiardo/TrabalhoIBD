@@ -188,8 +188,6 @@ class SQLParser ( Parser ):
             projection = ProjectionNode(localctx.sl.columns)
             theta_join = localctx.fr.tj
 
-
-
             if(localctx.sl.columns is None):
                 selectingTables = []
             else:
@@ -212,13 +210,15 @@ class SQLParser ( Parser ):
             if(not localctx.fr.tables is None):
                 for t in selectingTables:
                     if(not t in localctx.fr.tables):
-                        print("Selecting unknow table " + t)
+                        msg = "Selecting unknow table " + t
+                        query_tree.set_error(msg)
                         valid_query = 0
                         projection = None
 
                 for t in whereTables:
                     if(not t in localctx.fr.tables):
-                        print("Unknown table " + t + " being used in where clause")
+                        msg = "Unknown table " + t + " being used in where clause"
+                        query_tree.set_error(msg)
                         valid_query = 0
                         projection = None
 
@@ -242,7 +242,8 @@ class SQLParser ( Parser ):
                 pass
             else:
                 projection = None
-                print("Not viable input at ", localctx.r.trailing_str)
+                msg = "Not viable input at " + localctx.r.trailing_str
+                query_tree.set_error(msg)
 
 
 
@@ -670,10 +671,12 @@ class SQLParser ( Parser ):
                 table1 = term[0].split('.')[0]
                 table2 = term[2].split('.')[0]
                 if table1 not in (localctx.tablesSoFar + [(None if localctx.t1 is None else localctx.t1.text)] + [(None if localctx.t2 is None else localctx.t2.text)]):
-                    print("Unknown table " + table1 + " referenced in JOIN condition")
+                    msg = "Unknown table " + table1 + " referenced in JOIN condition"
+                    query_tree.set_error(msg)
                     localctx.tj = None
                 if table2 not in (localctx.tablesSoFar + [(None if localctx.t1 is None else localctx.t1.text)] + [(None if localctx.t2 is None else localctx.t2.text)]):
-                    print("Unknown table " + table2 + " referenced in JOIN condition")
+                    msg = "Unknown table " + table2 + " referenced in JOIN condition"
+                    query_tree.set_error(msg)
                     localctx.tj = None
 
             if None in localctx.j.table:
@@ -762,10 +765,12 @@ class SQLParser ( Parser ):
                     table2 = term[2].split('.')[0]
 
                     if table1 not in (localctx.tablesSoFar + [(None if localctx.t is None else localctx.t.text)]):
-                        print("Unknown table " + table1 + " referenced in JOIN condition")
+                        msg = "Unknown table " + table1 + " referenced in JOIN condition"
+                        query_tree.set_error(msg)
                         localctx.table += [None]
                     if table2 not in (localctx.tablesSoFar + [(None if localctx.t is None else localctx.t.text)]):
-                        print("Unknown table " + table2 + " referenced in JOIN condition")
+                        msg = "Unknown table " + table2 + " referenced in JOIN condition"
+                        query_tree.set_error(msg)
                         localctx.table += [None]
                 pass
 
