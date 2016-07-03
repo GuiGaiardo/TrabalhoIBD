@@ -1,1 +1,3 @@
-a  select a.x from b
+select a.x
+from b
+where a.x > 10 n;

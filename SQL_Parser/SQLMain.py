@@ -103,10 +103,13 @@ class KeyPrinter(SQLListener):
 
 
 def main(input):
+    global errors
+    errors = []
     with open("tmp", "w") as input_file:
         input_file.write(input)
 
     query_tree.valid = True
+    query_tree.errors = []
     input_file = FileStream("tmp")
     lexer = SQLLexer(input_file)
     stream = CommonTokenStream(lexer)
